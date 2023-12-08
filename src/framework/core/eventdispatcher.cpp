@@ -51,8 +51,10 @@ void EventDispatcher::shutdown()
 
 void EventDispatcher::poll()
 {
-    mergeEvents();
-    executeEvents();
+    do {
+        executeEvents();
+        mergeEvents();
+    } while (!m_eventList.empty());
     executeScheduledEvents();
 }
 
