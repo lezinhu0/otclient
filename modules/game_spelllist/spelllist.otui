@@ -14,7 +14,7 @@ SpellListLabel < Label
     color: #ffffff
 
 SpellInfoLabel < Label
-  width: 70
+  width: 90
   font: verdana-11px-monochrome
   text-align: right
   margin-left: 10

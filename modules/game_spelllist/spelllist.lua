@@ -104,7 +104,7 @@ function init()
     })
 
     spelllistWindow = g_ui.displayUI('spelllist', modules.game_interface.getRightPanel())
-    -- spelllistWindow:hide()
+    spelllistWindow:hide()
 
     spelllistButton = modules.game_mainpanel.addToggleButton('spelllistButton', tr('Spell List'),
                                                                       '/images/options/button_spells', toggle, false, 4)
