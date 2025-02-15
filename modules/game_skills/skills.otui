@@ -118,12 +118,43 @@ MiniWindow
       SkillValueLabel
 
     SkillButton
+      id: regenerationTime
+      SkillNameLabel
+        !text: tr('Regeneration Time')
+      SkillValueLabel
+
+    SkillButton
+      id: stamina
+      SkillNameLabel
+        !text: tr('Stamina')
+      SkillValueLabel
+      RedPercentPanel
+
+    SkillButton
+      id: offlineTraining
+      SkillNameLabel
+        !text: tr('Offline Training')
+      SkillValueLabel
+      RedPercentPanel
+
+    SkillButton
       id: magiclevel
       SkillNameLabel
         !text: tr('Magic Level')
       SkillValueLabel
       ImageSkill
         image-source: /images/icons/icon_magic
+        image-size: 9 9
+      SkillPercentPanel
+        background-color: red
+
+    SkillButton
+      id: skillId0
+      SkillNameLabel
+        !text: tr('Fist Fighting')
+      SkillValueLabel
+      ImageSkill
+        image-source: /images/icons/icon_fist
         image-size: 9 9
       SkillPercentPanel
 
@@ -177,6 +208,76 @@ MiniWindow
         image-size: 9 9
       SkillPercentPanel
 
+    SkillButton
+      id: skillId6
+      SkillNameLabel
+        !text: tr('Fishing')
+      SkillValueLabel
+      ImageSkill
+        image-source: /images/icons/icon_fishing
+        image-size: 9 9
+      SkillPercentPanel
+        
     HorizontalSeparator
       margin-top: 5
       margin-bottom: 5
+
+    SmallSkillButton
+      id: skillId7
+      SkillNameLabel
+        !text: tr('Critical Hit Chance')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId8
+      SkillNameLabel
+        !text: tr('Critical Hit Damage')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId9
+      SkillNameLabel
+        !text: tr('Life Leech Chance')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId10
+      SkillNameLabel
+        !text: tr('Life Leech Amount')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId11
+      SkillNameLabel
+        !text: tr('Mana Leech Chance')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId12
+      SkillNameLabel
+        !text: tr('Mana Leech Amount')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId13
+      SkillNameLabel
+        !text: tr('Fatal')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId14
+      SkillNameLabel
+        !text: tr('Dodge')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId15
+      SkillNameLabel
+        !text: tr('Momentum')
+      SkillValueLabel
+
+    SmallSkillButton
+      id: skillId16
+      SkillNameLabel
+        !text: tr('Transcendence')
+      SkillValueLabel

@@ -627,18 +627,6 @@ function EnterGame.tryHttpLogin(clientVersion, httpLogin)
     http:httpLogin(host, path, G.port, G.account, G.password, G.requestId, httpLogin)
 end
 
-function printTable(t)
-    for k, v in pairs(t) do
-        if type(v) == "table" then
-            print(string.format("%q: {", k))
-            printTable(v)
-            print("}")
-        else
-            print(string.format("%q:", k) .. tostring(v) .. ",")
-        end
-    end
-end
-
 function EnterGame.loginSuccess(requestId, jsonSession, jsonWorlds, jsonCharacters)
     if G.requestId ~= requestId then
         return

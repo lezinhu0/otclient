@@ -71,8 +71,8 @@ void LoginHttp::startHttpLogin(const std::string& host, const std::string& path,
                                const std::string& password) {
     httplib::SSLClient cli(host, port);
 
-    cli.set_logger(
-        [this](const auto& req, const auto& res) { LoginHttp::Logger(req, res); });
+    // cli.set_logger(
+    //     [this](const auto& req, const auto& res) { LoginHttp::Logger(req, res); });
 
     const auto body = json{ {"email", email}, {"password", password}, {"stayloggedin", true}, {"type", "login"} };
     const httplib::Headers headers = { {"User-Agent", "Mozilla/5.0"} };
@@ -208,8 +208,8 @@ httplib::Result LoginHttp::loginHttpsJson(const std::string& host,
                                           const std::string& password) {
     httplib::SSLClient client(host, port);
 
-    client.set_logger(
-        [this](const auto& req, const auto& res) { LoginHttp::Logger(req, res); });
+    // client.set_logger(
+    //     [this](const auto& req, const auto& res) { LoginHttp::Logger(req, res); });
 
     const json body = { {"email", email}, {"password", password}, {"stayloggedin", true}, {"type", "login"} };
     const httplib::Headers headers = { {"User-Agent", "Mozilla/5.0"} };
@@ -240,8 +240,8 @@ httplib::Result LoginHttp::loginHttpJson(const std::string& host,
                                          const std::string& email,
                                          const std::string& password) {
     httplib::Client client(host, port);
-    client.set_logger(
-        [this](const auto& req, const auto& res) { LoginHttp::Logger(req, res); });
+    // client.set_logger(
+    //     [this](const auto& req, const auto& res) { LoginHttp::Logger(req, res); });
 
     const httplib::Headers headers = { {"User-Agent", "Mozilla/5.0"} };
     const json body = { {"email", email}, {"password", password}, {"stayloggedin", true}, {"type", "login"} };
