@@ -109,7 +109,6 @@ locale = {
     ["Comment"] = "Comentário",
     ["Connecting to game server..."] = "Conectando no servidor do jogo...",
     ["Connecting to login server..."] = "Conectando no servidor de autenticação...",
-    ["Connecting to login server...\nServer: [%s]"] = "Conectando no servidor de autenticação...\nServidor: [%s]",
     ["Connection Error"] = "Erro de Conexão",
     ["Connection failed the server address does not exist."] = "Conexão falhou, servidor não existe.",
     ["Connection failed, the server address does not exist."] = false,

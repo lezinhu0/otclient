@@ -608,7 +608,7 @@ function EnterGame.tryHttpLogin(clientVersion, httpLogin)
     if not host then
         loadBox = displayCancelBox(tr('Please wait'), tr('ERROR , try adding \n- ip/login.php \n- Enable HTTP login'))
     else
-        loadBox = displayCancelBox(tr('Please wait'), tr('Connecting to login server...\nServer: [%s]',
+        loadBox = displayCancelBox(tr('Please wait'), tr('Connecting to login server...',
             host .. ":" .. tostring(G.port) .. path))
     end
 
