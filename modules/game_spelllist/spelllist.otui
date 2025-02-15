@@ -324,3 +324,12 @@ MainWindow
     margin-top: 3
     !text: tr('Yes')
     width: 75
+
+  Panel
+    id: panelSpellVideo
+    anchors.top: parent.top
+    anchors.left: labelNameValue.right
+    width: 450
+    height: 320
+    padding: 30
+    margin-left: 30

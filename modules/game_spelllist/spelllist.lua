@@ -4,6 +4,7 @@ spelllistWindow = nil
 spelllistButton = nil
 spellList = nil
 nameValueLabel = nil
+videoImageSrc = nil
 formulaValueLabel = nil
 vocationValueLabel = nil
 groupValueLabel = nil
@@ -103,13 +104,14 @@ function init()
     })
 
     spelllistWindow = g_ui.displayUI('spelllist', modules.game_interface.getRightPanel())
-    spelllistWindow:hide()
+    -- spelllistWindow:hide()
 
     spelllistButton = modules.game_mainpanel.addToggleButton('spelllistButton', tr('Spell List'),
                                                                       '/images/options/button_spells', toggle, false, 4)
     spelllistButton:setOn(false)
 
     nameValueLabel = spelllistWindow:getChildById('labelNameValue')
+    videoImageSrc = spelllistWindow:getChildById('panelSpellVideo')
     formulaValueLabel = spelllistWindow:getChildById('labelFormulaValue')
     vocationValueLabel = spelllistWindow:getChildById('labelVocationValue')
     groupValueLabel = spelllistWindow:getChildById('labelGroupValue')
@@ -287,6 +289,7 @@ end
 function updateSpellInformation(widget)
     local spell = widget:getId()
 
+    local videoSrc = ''
     local name = ''
     local formula = ''
     local vocation = ''
@@ -324,8 +327,10 @@ function updateSpellInformation(widget)
         mana = info.mana .. ' / ' .. info.soul
         premium = (info.premium and 'yes' or 'no')
         description = info.description or '-'
+        videoSrc = info.videoSrc
     end
 
+    videoImageSrc:setImageSource(videoSrc)
     nameValueLabel:setText(name)
     formulaValueLabel:setText(formula)
     vocationValueLabel:setText(vocation)

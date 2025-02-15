@@ -6,33 +6,19 @@ SpelllistSettings = {
             height = 32
         },
         spellListWidth = 210,
-        spellWindowWidth = 550,
-        spellOrder = {'Animate Dead', 'Annihilation', "Apprentice's Strike", 'Arrow Call', 'Avalanche', 'Berserk',
-                      'Blood Rage', 'Bruise Bane', 'Brutal Strike', 'Buzz', 'Cancel Invisibility', 'Challenge',
-                      'Chameleon', 'Charge', 'Chill Out', 'Conjure Arrow', 'Conjure Bolt', 'Conjure Explosive Arrow',
-                      'Conjure Piercing Bolt', 'Conjure Poisoned Arrow', 'Conjure Power Bolt', 'Conjure Sniper Arrow',
-                      'Convince Creature', 'Creature Illusion', 'Cure Bleeding', 'Cure Burning', 'Cure Curse',
-                      'Cure Electrification', 'Cure Poison', 'Cure Poison Rune', 'Curse', 'Death Strike',
-                      'Desintegrate', 'Destroy Field', 'Divine Caldera', 'Divine Healing', 'Divine Missile',
-                      'Electrify', 'Enchant Party', 'Enchant Spear', 'Enchant Staff', 'Energy Beam', 'Energy Field',
-                      'Energy Strike', 'Energy Wall', 'Energy Wave', 'Energybomb', 'Envenom', 'Eternal Winter',
-                      'Ethereal Spear', 'Explosion', 'Fierce Berserk', 'Find Person', 'Fire Field', 'Fire Wall',
-                      'Fire Wave', 'Fireball', 'Firebomb', 'Flame Strike', 'Food', 'Front Sweep', 'Great Energy Beam',
-                      'Great Fireball', 'Great Light', 'Groundshaker', 'Haste', 'Heal Friend', 'Heal Party',
-                      'Heavy Magic Missile', 'Hells Core', 'Holy Flash', 'Holy Missile', 'Ice Strike', 'Ice Wave',
-                      'Icicle', 'Ignite', 'Inflict Wound', 'Intense Healing', 'Intense Healing Rune', 'Intense Recovery',
-                      'Intense Wound Cleansing', 'Invisibility', 'Levitate', 'Light', 'Light Healing',
-                      'Light Magic Missile', 'Lightning', 'Magic Patch', 'Magic Rope', 'Magic Shield', 'Magic Wall',
-                      'Mass Healing', 'Mud Attack', 'Paralyze', 'Physical Strike', 'Poison Bomb', 'Poison Field',
-                      'Poison Wall', 'Practise Fire Wave', 'Practise Healing', 'Practise Magic Missile', 'Protect Party',
-                      'Protector', 'Rage of the Skies', 'Recovery', 'Salvation', 'Scorch',
-                      'Sharpshooter', 'Soulfire', 'Stalagmite', 'Stone Shower', 'Strong Energy Strike',
-                      'Strong Ethereal Spear', 'Strong Flame Strike', 'Strong Haste', 'Strong Ice Strike',
-                      'Strong Ice Wave', 'Strong Terra Strike', 'Sudden Death', 'Summon Creature', 'Swift Foot',
-                      'Terra Strike', 'Terra Wave', 'Thunderstorm', 'Train Party', 'Ultimate Energy Strike',
-                      'Ultimate Flame Strike', 'Ultimate Healing', 'Ultimate Healing Rune', 'Ultimate Ice Strike',
-                      'Ultimate Light', 'Ultimate Terra Strike', 'Whirlwind Throw', 'Wild Growth', 'Wound Cleansing',
-                      'Wrath of Nature'}
+        spellWindowWidth = 1050,
+        spellOrder = {
+            'Annihilation', "Apprentice's Strike", 'Berserk', 'Blood Rage', 'Brutal Strike', 'Buzz', 'Challenge',
+            'Chill Out', 'Arrow Rain', 'Explosive Arrow', 'Death Strike', 'Divine Caldera', 'Divine Healing', 'Divine Missile',
+            'Electrify', 'Energy Beam', 'Energy Strike', 'Energy Wave', 'Eternal Winter', 'Ethereal Spear', 'Fierce Berserk',
+            'Fire Explosion', 'Flame Strike', 'Front Sweep', 'Great Energy Beam', 'Groundshaker', 'Heal Friend', 'Hells Core',
+            'Ice Strike', 'Ice Wave', 'Ignite', 'Inflict Wound', 'Intense Wound Cleansing', 'Light', 'Lightning', 'Magic Rope',
+            'Magic Shield', 'Mass Healing', 'Mud Attack', 'Physical Strike', 'Protector', 'Rage of the Skies', 'Recovery',
+            'Scorch', 'Strong Energy Strike', 'Strong Ethereal Spear', 'Strong Flame Strike', 'Strong Ice Strike',
+            'Strong Ice Wave', 'Strong Terra Strike', 'Summon Creature', 'Terra Strike', 'Terra Wave', 'Ultimate Energy Strike',
+            'Ultimate Flame Strike', 'Ultimate Healing', 'Ultimate Ice Strike', 'Ultimate Light', 'Ultimate Terra Strike',
+            'Whirlwind Throw', 'Wrath of Nature'
+        }
     } --[[,
   ['Custom'] =  {
     iconFile = '/images/game/spells/custom',
@@ -49,6 +35,11 @@ SpelllistSettings = {
     }
   }]]
 }
+table.sort(SpelllistSettings.Default.spellOrder,
+    function(a, b)
+        return a < b
+    end
+)
 
 SpellInfo = {
     ['Default'] = {
@@ -184,21 +175,22 @@ SpellInfo = {
             parameter = false,
             vocations = {4, 8}
         },
-        ['Fire Wave'] = {
+        ['Fire Explosion'] = {
             id = 19,
             words = 'exevo flam hur',
             exhaustion = 4000,
             premium = false,
             type = 'Instant',
             icon = 'firewave',
-            mana = 25,
+            mana = 180,
             level = 18,
             soul = 0,
             group = {
                 [1] = 2000
             },
             parameter = false,
-            vocations = {1, 5}
+            vocations = {1, 5},
+            videoSrc = '/images/fire_wave'
         },
         ['Ethereal Spear'] = {
             id = 111,
@@ -1382,7 +1374,7 @@ SpellInfo = {
             parameter = true,
             vocations = {1, 2, 5, 6}
         },
-        ['Conjure Arrow'] = {
+        ['Arrow Rain'] = {
             id = 51,
             words = 'exevo con',
             exhaustion = 2000,
@@ -1462,7 +1454,7 @@ SpellInfo = {
             parameter = false,
             vocations = {3, 7}
         },
-        ['Conjure Explosive Arrow'] = {
+        ['Explosive Arrow'] = {
             id = 49,
             words = 'exevo con flam',
             exhaustion = 2000,
