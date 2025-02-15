@@ -29,7 +29,12 @@ local function tryLogin(charInfo, tries)
         return
     end
 
+    -- save last used character
+    g_settings.set('last-used-character', charInfo.characterName)
+    g_settings.set('last-used-world', charInfo.worldName)
+
     if g_game.isOnline() then
+        print('g_game is online...')
         if tries == 1 then
             g_game.safeLogout()
 			if loginEvent then
@@ -44,8 +49,8 @@ local function tryLogin(charInfo, tries)
     end
 
     CharacterList.hide()
-
-    g_game.loginWorld(G.account, G.password, charInfo.worldName, charInfo.worldHost, charInfo.worldPort,
+    
+    g_game.loginWorld(G.account, G.password, charInfo.worldName, charInfo.worldHost == "localhost" and "127.0.0.1" or charInfo.worldHost, charInfo.worldPort,
                       charInfo.characterName, G.authenticatorToken, G.sessionKey)
 
     loadBox = displayCancelBox(tr('Please wait'), tr('Connecting to game server...'))
@@ -57,9 +62,6 @@ local function tryLogin(charInfo, tries)
         end
     })
 
-    -- save last used character
-    g_settings.set('last-used-character', charInfo.characterName)
-    g_settings.set('last-used-world', charInfo.worldName)
     removeAutoReconnectEvent()
 end
 

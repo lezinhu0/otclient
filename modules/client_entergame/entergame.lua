@@ -38,6 +38,15 @@ end
 local function onCharacterList(protocol, characters, account, otui)
     local httpLogin = enterGame:getChildById('httpLoginBox'):isChecked()
 
+    table.sort(characters, 
+        function(a, b) 
+            if a.level == b.level then
+                return a.name < b.name
+            end
+            return a.level > b.level
+        end
+    )
+
     -- Try add server to the server list
     ServerList.add(G.host, G.port, g_game.getClientVersion(), httpLogin)
 
@@ -696,7 +705,7 @@ function EnterGame.doLogin()
     G.password = enterGame:getChildById('accountPasswordTextEdit'):getText()
     G.authenticatorToken = enterGame:getChildById('authenticatorTokenTextEdit'):getText()
     G.stayLogged = enterGame:getChildById('stayLoggedBox'):isChecked()
-    G.host = enterGame:getChildById('serverHostTextEdit'):getText()
+    G.host = "127.0.0.1/login.php"
     G.port = tonumber(enterGame:getChildById('serverPortTextEdit'):getText())
     local clientVersion = tonumber(clientBox:getText())
     local httpLogin = enterGame:getChildById('httpLoginBox'):isChecked()
