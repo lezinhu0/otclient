@@ -39,7 +39,7 @@ FilterButton < Button
 MainWindow
   id: spelllistWindow
   !text: tr('Spell List')
-  size: 550 400
+  size: 550 550
   @onEscape: toggle()
 
   TextList
@@ -329,7 +329,7 @@ MainWindow
     id: panelSpellVideo
     anchors.top: parent.top
     anchors.left: labelNameValue.right
-    width: 450
-    height: 320
+    width: 600
+    height: 450
     padding: 30
     margin-left: 30

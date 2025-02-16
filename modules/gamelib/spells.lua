@@ -6,7 +6,7 @@ SpelllistSettings = {
             height = 32
         },
         spellListWidth = 210,
-        spellWindowWidth = 1050,
+        spellWindowWidth = 1200,
         spellOrder = {
             'Annihilation', "Apprentice's Strike", 'Berserk', 'Blood Rage', 'Brutal Strike', 'Buzz', 'Challenge',
             'Chill Out', 'Arrow Rain', 'Explosive Arrow', 'Death Strike', 'Divine Caldera', 'Divine Healing', 'Divine Missile',
@@ -238,7 +238,8 @@ SpellInfo = {
                 [1] = 2000
             },
             parameter = false,
-            vocations = {1, 5}
+            vocations = {1, 5},
+            videoSrc = '/images/exevo_vis_lux'
         },
         ['Great Energy Beam'] = {
             id = 23,
@@ -2214,7 +2215,7 @@ SpellInfo = {
             group = {
                 [1] = 2000
             },
-            vocations = {1, 5}
+            vocations = {1, 5},
         },
         ['Restoration'] = {
             id = 241,

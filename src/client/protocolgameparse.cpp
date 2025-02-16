@@ -2077,6 +2077,7 @@ void ProtocolGame::parsePlayerInfo(const InputMessagePtr& msg) const
         msg->getU32(); // premium expiration used for premium advertisement
     }
 
+    //TODO CRIAR UM METODO DE CONVERTER O ID DA VOCATION CONFORME UTILIZADA PELO CLIENT
     const uint8_t vocation = msg->getU8(); // vocation
 
     if (g_game.getFeature(Otc::GamePrey)) {

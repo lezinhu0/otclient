@@ -348,6 +348,11 @@ function toggle()
         spelllistButton:setOn(false)
         spelllistWindow:hide()
     else
+        local buttonFilterLevel = spelllistWindow:getChildById('buttonFilterLevel')
+        buttonFilterLevel:setOn(true)
+
+        filters.level = true
+
         spelllistButton:setOn(true)
         spelllistWindow:show()
         spelllistWindow:raise()
