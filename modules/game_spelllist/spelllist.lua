@@ -52,8 +52,8 @@ FILTER_GROUP_SUPPORT = 3
 
 -- Filter Settings
 local filters = {
-    level = false,
-    vocation = false,
+    level = true,
+    vocation = true,
 
     vocationId = FILTER_VOCATION_ANY,
     premium = FILTER_PREMIUM_ANY,
@@ -266,6 +266,13 @@ function changeSpelllistProfile(oldProfile)
 end
 
 function updateSpelllist()
+    local vocationDict = {
+        [1] = FILTER_VOCATION_KNIGHT,
+        [2] = FILTER_VOCATION_PALADIN,
+        [3] = FILTER_VOCATION_SORCERER,
+        [4] = FILTER_VOCATION_DRUID
+    }
+
     for i = 1, #SpelllistSettings[SpelllistProfile].spellOrder do
         local spell = SpelllistSettings[SpelllistProfile].spellOrder[i]
         local info = SpellInfo[SpelllistProfile][spell]
@@ -273,7 +280,7 @@ function updateSpelllist()
 
         local localPlayer = g_game.getLocalPlayer()
         if (not (filters.level) or info.level <= localPlayer:getLevel()) and
-            (not (filters.vocation) or table.find(info.vocations, localPlayer:getVocation())) and
+            (not (filters.vocation) or table.find(info.vocations, vocationDict[localPlayer:getVocation()])) and
             (filters.vocationId == FILTER_VOCATION_ANY or table.find(info.vocations, filters.vocationId) or
                 table.find(info.vocations, filters.vocationId + 4)) and
             (filters.groupId == FILTER_GROUP_ANY or info.group[filters.groupId]) and
@@ -351,12 +358,17 @@ function toggle()
         local buttonFilterLevel = spelllistWindow:getChildById('buttonFilterLevel')
         buttonFilterLevel:setOn(true)
 
+        local buttonFilterVocation = spelllistWindow:getChildById('buttonFilterVocation')
+        buttonFilterVocation:setOn(true)
+
         filters.level = true
+        filters.vocation = true
 
         spelllistButton:setOn(true)
         spelllistWindow:show()
         spelllistWindow:raise()
         spelllistWindow:focus()
+        updateSpelllist()
     end
 end
 

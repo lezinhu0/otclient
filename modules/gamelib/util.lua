@@ -26,18 +26,23 @@ function tableToJson(tbl, indent)
             formattedValue = tableToJson(v, indent + 2)
         elseif type(v) == "string" then
             formattedValue = '"' .. v .. '"'
-		elseif type(v) == "boolean" then
-			if (v) then
-				formattedValue = "true"
-			else
-				formattedValue = "false"
-			end		
+        elseif type(v) == "boolean" then
+            formattedValue = v and "true" or "false"
+        elseif type(v) == "function" then
+            formattedValue = '"<function>"'  -- Replace function with placeholder
+        elseif type(v) == "userdata" then
+            formattedValue = '"<userdata>"'  -- Handle userdata safely
+        elseif type(v) == "thread" then
+            formattedValue = '"<thread>"'
+        elseif type(v) == "nil" then
+            formattedValue = "null"
         end
-        table.insert(result, spaces .. "  " .. formattedKey .. ": " .. formattedValue .. ",\n")
+        table.insert(result, spaces .. "  " .. formattedKey .. ": " .. tostring(formattedValue) .. ",\n")
     end
     table.insert(result, spaces .. "}\n")
     return table.concat(result)
 end
+
 
 function printTable(t, indent)
 	if type(t) == "table" then

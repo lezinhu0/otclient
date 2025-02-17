@@ -599,6 +599,18 @@ function createThingMenu(menuPosition, lookThing, useThing, creatureThing)
             end
         end
 
+        if lookThing and lookThing:isItem() and not lookThing:isNotMoveable() then
+            menu:addOption('Cyclopedia',
+                function()
+                    local cyclopediaModule = modules.game_cyclopedia
+                    local cyclopedia = cyclopediaModule.Cyclopedia
+
+                    cyclopediaModule.show()
+                    cyclopedia.ItemSearch(lookThing:getMarketData().name, false)
+                end
+            )
+        end
+
         if useThing:isRotateable() then
             menu:addOption(tr('Rotate'), function()
                 g_game.rotate(useThing)
