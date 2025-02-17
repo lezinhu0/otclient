@@ -270,9 +270,6 @@ void ProtocolGame::parseMessage(const InputMessagePtr& msg)
                         parseCreatureMark(msg);
                     }
                     break;
-                case Proto::GameServerTrappers:
-                    parseTrappers(msg);
-                    break;
                 case Proto::GameServerCloseForgeWindow:
                     parseCloseForgeWindow(msg);
                     break;
@@ -598,6 +595,9 @@ void ProtocolGame::parseMessage(const InputMessagePtr& msg)
                 case Proto::GameServerStoreCompletePurchase:
                     parseCompleteStorePurchase(msg);
                     break;
+                case Proto::GameServerOpenForge:
+                    parseOpenForge(msg);
+                    break;
                 default:
                     throw Exception("unhandled opcode %d", opcode);
             }
@@ -836,6 +836,41 @@ void ProtocolGame::parseCoinBalanceUpdating(const InputMessagePtr& msg)
     } else {
         // coin balance can be updating and might not be accurate
         msg->getU8(); // == 1; // isUpdating
+    }
+}
+
+void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const
+{
+    uint8_t fusionTotalItemsCount = msg->getU16();
+    
+    //Items that are possible of being forged... can be shown in the forge window
+    for (uint32_t i = 0; i < fusionTotalItemsCount; i++) {
+        auto friendItems = msg->getU8();
+        auto itemId = msg->getU16();
+        auto itemTier = msg->getU8();
+        auto itemCount = msg->getU16();
+
+        g_logger.info(stdext::format("Player has a total of %d of item: %d on tier: %d, so its possible to forge it", itemCount, itemId, itemTier));
+    }
+
+    auto convergenceFusionCount = msg->getU16();
+    for (uint32_t i = 0; i < convergenceFusionCount; i++) {
+        auto totalItemsCount = msg->getU8();
+        for (uint32_t j = 0; j < totalItemsCount; j++) {
+            auto itemId = msg->getU16();
+            auto itemTier = msg->getU8();
+            auto itemCount = msg->getU16();
+        }
+    }
+
+    auto transferTotalCount = msg->getU8();
+    for (uint32_t i = 0; i < transferTotalCount; i++) {
+        auto donorTierTotalItemsCount = msg->getU16();
+        for (uint32_t j = 0; j < donorTierTotalItemsCount; j++) {
+            auto itemId = msg->getU16();
+            auto itemTier = msg->getU8();
+            auto itemCount = msg->getU16();
+        }
     }
 }
 

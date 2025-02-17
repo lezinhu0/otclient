@@ -50,7 +50,7 @@ GameServerOpcodes = {
     GameServerTextEffect = 132,
     GameServerMissleEffect = 133, -- Anthem on 13.x
     GameServerMarkCreature = 134,
-    GameServerTrappers = 135,
+    GameServerOpenForge = 135,
     GameServerCreatureHealth = 140,
     GameServerCreatureLight = 141,
     GameServerCreatureOutfit = 142,
@@ -106,7 +106,7 @@ GameServerOpcodes = {
     GameServerStore = 251, -- 1080
     GameServerStoreOffers = 252, -- 1080
     GameServerStoreTransactionHistory = 253, -- 1080
-    GameServerStoreCompletePurchase = 254 -- 1080
+    GameServerStoreCompletePurchase = 254, -- 1080
 }
 
 ClientOpcodes = {

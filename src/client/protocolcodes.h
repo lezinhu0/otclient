@@ -117,7 +117,7 @@ namespace Proto
         GameServerTextEffect = 132,
         GameServerMissleEffect = 133, // Anthem on 13.x
         GameServerItemClasses = 134,
-        GameServerTrappers = 135,
+        GameServerOpenForge = 135,
         GameServerCloseForgeWindow = 137,
         GameServerCreatureData = 139,
         GameServerCreatureHealth = 140,
@@ -221,7 +221,7 @@ namespace Proto
         GameServerStore = 251,
         GameServerStoreOffers = 252,
         GameServerStoreTransactionHistory = 253,
-        GameServerStoreCompletePurchase = 254
+        GameServerStoreCompletePurchase = 254,
     };
 
     enum ClientOpcodes : uint8_t
