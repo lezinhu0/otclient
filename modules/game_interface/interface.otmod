@@ -13,7 +13,6 @@ Module
     - game_healthinfo
     - game_inventory
     - game_mainpanel
-    - game_prey
     - game_imbuing
     - game_hotkeys
     - game_questlog
@@ -36,7 +35,6 @@ Module
     - game_spelllist
     - game_cooldown
     - game_modaldialog
-    - game_unjustifiedpoints
     - game_shaders
     - game_attachedeffects
     - game_stash
