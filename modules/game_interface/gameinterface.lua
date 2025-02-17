@@ -599,7 +599,7 @@ function createThingMenu(menuPosition, lookThing, useThing, creatureThing)
             end
         end
 
-        if lookThing and lookThing:isItem() and not lookThing:isNotMoveable() then
+        if lookThing and lookThing:isItem() and not lookThing:isNotMoveable() and lookThing:getMarketData() then
             menu:addOption('Cyclopedia',
                 function()
                     local cyclopediaModule = modules.game_cyclopedia

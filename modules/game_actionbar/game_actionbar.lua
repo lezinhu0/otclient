@@ -263,10 +263,25 @@ function initializeSpelllist()
         spellsPanel:focusPreviousChild(KeyboardFocusReason)
     end, spellsPanel:getParent())
 
+    local vocationDict = {
+        [1] = 4,
+        [2] = 3,
+        [3] = 1,
+        [4] = 2
+    }
+
+    local localPlayer = g_game.getLocalPlayer()
+    local vocation = vocationDict[localPlayer:getVocation()]
+
     for spellProfile, _ in pairs(SpelllistSettings) do
         for i = 1, #SpelllistSettings[spellProfile].spellOrder do
             local spell = SpelllistSettings[spellProfile].spellOrder[i]
             local info = SpellInfo[spellProfile][spell]
+
+            if not table.contains(info.vocations, vocation) then
+                goto continue
+            end
+
             if info then
                 local tmpLabel = g_ui.createWidget('SpellListLabel', spellsPanel)
                 tmpLabel:setId(spell)
@@ -289,6 +304,7 @@ function initializeSpelllist()
                 tmpLabel:setImageSize(tosize(SpelllistSettings[spellProfile].iconSize.width .. ' ' ..
                                                  SpelllistSettings[spellProfile].iconSize.height))
             end
+            ::continue::
         end
     end
 
