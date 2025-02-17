@@ -130,6 +130,8 @@ function init() -- Initiating the module (load)
         onGameStart = onGameStart
     })
 
+    hideFilterPanel()
+
     -- Determining Height and Setting up!
     battleWindow:setContentMinimumHeight(80)
     battleWindow:setup()
