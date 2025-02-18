@@ -10,11 +10,7 @@ ForgeItem < UIWidget
   id: forgeItem
   image-source: /images/ui/item
   margin-top: 10
-  focusable: true
   size: 45 55
-  virtual: true
-  $focus:
-    border: 1 white
 
   UIItem
     id: Sprite
@@ -71,27 +67,30 @@ MainWindow
     anchors.right: parent.right
     image-source: /images/ui/window_new
     image-border: 4
-    height: 250
+    height: 140
     margin-top: 50
     padding: 10
+    text-offset: 0 -62
+    text: Select Item For Fusion
+    color: #BFBFBF
 
     Panel
       id: forgeItems
       anchors.top: parent.top
       anchos.left: parent.left
-      height: 250
+      height: 140
       width: 250
 
       UIScrollArea
         id: List
         anchors.fill: ItemListBase
         vertical-scrollbar: ListScrollbar
-        size: 250 225
+        size: 250 120
         image-border: 10
         padding-bottom: 1
         layout:
           type: grid
-          cell-size: 45 55
+          cell-size: 35 46
           flow: true
           cell-spacing: 5
 
@@ -103,6 +102,18 @@ MainWindow
         margin-top: 10
         step: 30
         pixel-scroll: true
+      
+    Panel
+      id: ForgeItemsProperties
+      anchors.top: parent.top
+      anchors.left: forgeItems.right
+      margin-left: 10
+      margin-top: 10
+      background-color: #ffffff20
+      size: 423 110
+
+
+
 
   Button
     id: closeButton

@@ -119,6 +119,7 @@ namespace Proto
         GameServerItemClasses = 134,
         GameServerOpenForge = 135,
         GameServerCloseForgeWindow = 137,
+        GameServerProcessForgeResult = 138,
         GameServerCreatureData = 139,
         GameServerCreatureHealth = 140,
         GameServerCreatureLight = 141,

@@ -598,6 +598,9 @@ void ProtocolGame::parseMessage(const InputMessagePtr& msg)
                 case Proto::GameServerOpenForge:
                     parseOpenForge(msg);
                     break;
+                case Proto::GameServerProcessForgeResult:
+                    parseForgeResult(msg);
+                    break;
                 default:
                     throw Exception("unhandled opcode %d", opcode);
             }
@@ -839,8 +842,30 @@ void ProtocolGame::parseCoinBalanceUpdating(const InputMessagePtr& msg)
     }
 }
 
+void ProtocolGame::parseForgeResult(const InputMessagePtr& msg) const
+{
+    g_logger.info("ProtocolGame::parseForgeResult - TODO handle forge result here!");
+
+    auto actionType = msg->getU8();
+    bool convergence = msg->getU8();
+    bool success = msg->getU8();
+    auto leftItemId = msg->getU16();
+    auto leftItemTier = msg->getU8();
+    auto rightItemId = msg->getU16();
+    auto rightItemTier = msg->getU8();
+    uint8_t bonus = msg->getU8();
+    if (bonus == 2) { //core kept
+        auto coreCount = msg->getU8();
+    } else if (bonus >= 4 && bonus <= 8) {
+        auto keptItemId = msg->getU16();
+        auto keptItemTier = msg->getU8();
+    }
+}
+
 void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const
 {
+    g_logger.info("ProtocolGame::parseOpenForge - TODO handle open forge!");
+    
     uint8_t fusionTotalItemsCount = msg->getU16();
     
     std::vector<ItemPtr> forgeItems;

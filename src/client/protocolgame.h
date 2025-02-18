@@ -349,6 +349,7 @@ private:
     void parseCreatureShader(const InputMessagePtr& msg);
     void parseMapShader(const InputMessagePtr& msg);
     void parseOpenForge(const InputMessagePtr& msg) const;
+    void parseForgeResult(const InputMessagePtr& msg) const;
 
     MarketOffer readMarketOffer(const InputMessagePtr& msg, uint8_t action, uint16_t var);
 

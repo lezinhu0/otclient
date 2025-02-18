@@ -1,22 +1,23 @@
-forgeWindow = nil
+local forgeWindow = nil
+local improveSucces = false
 
 function init()
     forgeWindow = g_ui.displayUI('forge')
-    forgeWindow:hide()
+    -- forgeWindow:hide()
 
     connect(g_game, {
         onOpenForge = show,
-        onGameEnd = destroyWindows
+        onGameEnd = hide
     })
 end
 
 function terminate()
-    destroyWindows()
     disconnect(g_game, {
         onOpenForge = show,
-        onGameEnd = destroyWindows
+        onGameEnd = hide
     })
-    Keybind.delete("Windows", "Close forge window")
+    forgeWindow:destroy()
+    forgeWindow = nil
 end
 
 function hide()
@@ -33,7 +34,6 @@ end
 
 function show(forgeItems)
     clearItems()
-
     local listWidget = forgeWindow:recursiveGetChildById("List")
     for _, item in ipairs(forgeItems) do
         local forgeItem = g_ui.createWidget("ForgeItem", listWidget)
@@ -73,5 +73,6 @@ function handleItemClick(self)
     for _, item in ipairs(items) do
         item:setOn(false)
     end
-    g_game.forgeFusionItem(self:getItem())
+    g_game.forgeFusionItem(self:getItem(), improveSucces)
+    hide()
 end

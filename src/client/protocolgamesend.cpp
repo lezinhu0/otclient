@@ -1395,7 +1395,7 @@ void ProtocolGame::openContainerQuickLoot(const uint8_t action, const uint8_t ca
 }
 
 void ProtocolGame::sendForgeFusionItem(const ItemPtr& item) {
-    g_logger.info("Trying to send forge fusion item!");
+    g_logger.info("ProtocolGame::sendForgeFusionItem - TODO handle entire forge message here");
 
     const auto msg = std::make_shared<OutputMessage>();
     msg->addU8(0xBF);
@@ -1404,7 +1404,7 @@ void ProtocolGame::sendForgeFusionItem(const ItemPtr& item) {
     msg->addU16(item->getId()); // first item id
     msg->addU8(item->getTier()); // item tier
     msg->addU16(item->getId()); // second item id
-    msg->addU8(false); // used core
+    msg->addU8(true); // used core
     msg->addU8(false); // reduce tier loss
     send(msg);
 }
