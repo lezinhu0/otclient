@@ -1,0 +1,107 @@
+SectionButton < Button
+  width: 275
+  height: 40
+  text-align: center
+  @onClick: modules.game_forge.handleButtonClick(self)
+  $on:
+    color: red
+
+ForgeItem < UIWidget
+  id: forgeItem
+  image-source: /images/ui/item
+  margin-top: 10
+  UIItem
+    id: Sprite
+    anchors.fill: parent
+    padding: 4
+    @onClick: modules.game_forge.handleItemClick(self)
+  UIItem
+    id: TierBadge
+    anchors.top: parent.top
+    anchors.right: parent.right
+    margin-top: 2
+    margin-right: -79
+    image-size: 10 9
+
+
+MainWindow
+  text: Forge
+  height: 600
+  width: 1200
+  padding-left: 50
+  padding-right: 50
+  padding-top: 40
+
+  SectionButton
+    id: forgeButton
+    anchors.left: parent.left
+    anchors.top: parent.top
+    text: Forge
+
+  SectionButton
+    id: transferButton
+    anchors.left: forgeButton.right
+    anchors.top: parent.top
+    text: Transfer
+
+  SectionButton
+    id: conversionButton
+    anchors.left: transferButton.right
+    anchors.top: parent.top
+    text: Conversion
+
+  SectionButton
+    id: historyButton
+    anchors.left: conversionButton.right
+    anchors.top: parent.top
+    text: History
+
+  Panel
+    id: pages
+    height: 50
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
+    padding: 0
+    image-source: /images/ui/window_new
+    image-border: 4
+    height: 250
+    margin-top: 100
+
+    Panel
+      id: forgeItems
+      anchors.top: parent.top
+      anchos.left: parent.left
+      height: 250
+      width: 400
+      padding: 7
+      padding-top: 18
+
+      UIScrollArea
+        id: List
+        anchors.fill: ItemListBase
+        vertical-scrollbar: ListScrollbar
+        margin-top: 5
+        size: 400 225
+        image-border: 10
+        padding-top: 1
+        padding-bottom: 1
+        layout:
+          type: grid
+          cell-size: 45 55
+          flow: true
+
+      VerticalScrollBar
+        id: ListScrollbar
+        anchors.top: List.top
+        anchors.right: List.right
+        anchors.bottom: List.bottom
+        step: 30
+        pixel-scroll: true
+
+  Button
+    id: closeButton
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
+    text: Close
+    @onClick: modules.game_forge.hide()

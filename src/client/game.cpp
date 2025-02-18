@@ -589,6 +589,11 @@ void Game::processWalkCancel(const Otc::Direction direction)
     m_localPlayer->cancelWalk(direction);
 }
 
+void Game::processOpenForge(const std::vector<ItemPtr> forgeItems)
+{
+    g_lua.callGlobalField("g_game", "onOpenForge", forgeItems);
+}
+
 void Game::loginWorld(const std::string_view account, const std::string_view password, const std::string_view worldName, const std::string_view worldHost, const int worldPort, const std::string_view characterName, const std::string_view authenticatorToken, const std::string_view sessionKey)
 {
     if (m_protocolGame || isOnline())

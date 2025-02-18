@@ -843,12 +843,20 @@ void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const
 {
     uint8_t fusionTotalItemsCount = msg->getU16();
     
+    std::vector<ItemPtr> forgeItems;
+
     //Items that are possible of being forged... can be shown in the forge window
     for (uint32_t i = 0; i < fusionTotalItemsCount; i++) {
         auto friendItems = msg->getU8();
         auto itemId = msg->getU16();
         auto itemTier = msg->getU8();
         auto itemCount = msg->getU16();
+
+        auto item = Item::create(itemId);
+        item->setTier(itemTier);
+        item->setCount(itemCount);
+
+        forgeItems.push_back(item);
 
         g_logger.info(stdext::format("Player has a total of %d of item: %d on tier: %d, so its possible to forge it", itemCount, itemId, itemTier));
     }
@@ -872,6 +880,9 @@ void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const
             auto itemCount = msg->getU16();
         }
     }
+
+
+    g_game.processOpenForge(forgeItems);
 }
 
 void ProtocolGame::parseCompleteStorePurchase(const InputMessagePtr& msg) const

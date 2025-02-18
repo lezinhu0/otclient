@@ -528,6 +528,7 @@ protected:
     static void processUpdateBestiaryCharmsData(const BestiaryCharmsData& charmData);
     static void processBosstiaryInfo(const std::vector<BosstiaryData>& boss);
     static void processBosstiarySlots(const BosstiarySlotsData& data);
+    static void processOpenForge(const std::vector<ItemPtr> forgeItems);
 
     friend class ProtocolGame;
     friend class Map;

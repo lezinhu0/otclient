@@ -135,6 +135,7 @@ end
 
 -- public functions
 function EnterGame.init()
+    -- if 1 == 1 then return end
     enterGame = g_ui.displayUI('entergame')
     Keybind.new("Misc.", "Change Character", "Ctrl+G", "")
     Keybind.bind("Misc.", "Change Character", {

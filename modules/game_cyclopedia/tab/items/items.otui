@@ -125,7 +125,7 @@ UIWidget
       anchors.top: List.top
       anchors.right: List.right
       anchors.bottom: List.bottom
-      step: 30
+      step: 70
       pixel-scroll: true
   UIWidget
     size: 32 32
@@ -435,7 +435,7 @@ UIWidget
 
   Button
     id: ManageButton
-    size: 120 20
+    size: 140 25
     anchors.left: parent.left
     anchors.bottom: parent.bottom
     !text: tr('Manage Containers')
@@ -443,5 +443,4 @@ UIWidget
     text-offset: 0 -1
     color: #C0C0C0
     @onClick: |
-      modules.game_cyclopedia.toggle()
       modules.game_quickloot.QuickLoot.toggle()

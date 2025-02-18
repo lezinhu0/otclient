@@ -1,0 +1,9 @@
+Module
+  name: game_forge
+  description: Handle forge operations
+  author: lezinhu0
+  website: https://github.com/edubart/otclient
+  sandboxed: true
+  scripts: [ forge ]
+  @onLoad: init()
+  @onUnload: terminate()
