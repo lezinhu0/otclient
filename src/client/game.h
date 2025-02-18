@@ -779,6 +779,8 @@ public:
     void sendStatusTrackerBestiary(uint16_t raceId, bool status);
     auto getServerWalkTicks() const { return m_walkTicks; }
     auto getWalkTicksElapsed() const { return m_walkTimer.ticksElapsed(); }
+
+    void forgeFusionItem(const ItemPtr& item);
 protected:
     void enableBotCall() { m_denyBotCall = false; }
     void disableBotCall() { m_denyBotCall = true; }

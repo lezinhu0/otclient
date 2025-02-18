@@ -248,7 +248,7 @@ MainWindow
     anchors.bottom: accountStatusCaption.top
     anchors.right: parent.right
     margin-bottom: 5
-    step: 14
+    step: 100
     pixels-scroll: true
 
   VerticalSeparator

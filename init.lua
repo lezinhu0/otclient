@@ -16,9 +16,9 @@ Servers_init = {
     },
 }
 
-g_app.setName("OTClient - Redemption");
-g_app.setCompactName("otclient");
-g_app.setOrganizationName("otcr");
+g_app.setName("Arcaneot");
+g_app.setCompactName("Arcaneot");
+g_app.setOrganizationName("Arcaneot");
 
 g_app.hasUpdater = function()
     return (Services.updater and Services.updater ~= "" and g_modules.getModule("updater"))

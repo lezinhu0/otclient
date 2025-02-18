@@ -151,6 +151,8 @@ public:
     void sendInspectionNormalObject(const Position& position);
     void sendInspectionObject(Otc::InspectObjectTypes inspectionType, uint16_t itemId, uint8_t itemCount);
 
+    void sendForgeFusionItem(const ItemPtr& item);
+
     // otclient only
     void sendChangeMapAwareRange(uint8_t xrange, uint8_t yrange);
 

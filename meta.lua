@@ -1188,6 +1188,10 @@ function g_game.requestHighscore(action, category, vocation, world, worldType, b
 ---@param isOpen? boolean false
 function g_game.imbuementDurations(isOpen) end
 
+
+---@param item Item
+function g_game.forgeFusionItem(item) end
+
 --------------------------------
 --------- g_gameConfig ---------
 --------------------------------

@@ -1885,3 +1885,7 @@ void Game::sendStatusTrackerBestiary(const uint16_t raceId, const bool status)
     m_protocolGame->sendStatusTrackerBestiary(raceId, status);
     disableBotCall();
 }
+
+void Game::forgeFusionItem(const ItemPtr& item) {
+    m_protocolGame->sendForgeFusionItem(item);
+}

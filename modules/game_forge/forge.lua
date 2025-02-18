@@ -26,7 +26,8 @@ end
 function clearItems()
     local forgeItems = forgeWindow:recursiveGetChildrenByStyleName('ForgeItem')
     for _, forgeItem in ipairs(forgeItems) do
-        forgeItem:destroy()    
+        forgeItem:destroy()
+        forgeItem = nil
     end
 end
 
@@ -48,11 +49,6 @@ function show(forgeItems)
                 height = 9
             })
         end
-
-
-        function forgeItem.onClick(widget)
-            
-        end
     end
     forgeWindow:show()
 end
@@ -73,5 +69,9 @@ function handleButtonClick(self)
 end
 
 function handleItemClick(self)
-    print(self:getItem():getId())
+    local items = forgeWindow:recursiveGetChildrenByStyleName("ForgeItem")
+    for _, item in ipairs(items) do
+        item:setOn(false)
+    end
+    g_game.forgeFusionItem(self:getItem())
 end

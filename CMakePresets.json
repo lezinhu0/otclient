@@ -28,7 +28,9 @@
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
-          "hostOS": [ "Windows" ]
+          "hostOS": [
+            "Windows"
+          ]
         }
       },
       "condition": {
@@ -78,6 +80,7 @@
       "displayName": "Windows - Debug",
       "description": "Build Debug Mode",
       "cacheVariables": {
+        "CMAKE_CXX_FLAGS_DEBUG": "-g -O0 -fno-omit-frame-pointer -fno-inline",
         "CMAKE_BUILD_TYPE": "Debug",
         "DEBUG_LOG": "ON",
         "ASAN_ENABLED": "ON",

@@ -1,5 +1,5 @@
 SectionButton < Button
-  width: 275
+  width: 175
   height: 40
   text-align: center
   @onClick: modules.game_forge.handleButtonClick(self)
@@ -10,12 +10,19 @@ ForgeItem < UIWidget
   id: forgeItem
   image-source: /images/ui/item
   margin-top: 10
+  focusable: true
+  size: 45 55
+  virtual: true
+  $focus:
+    border: 1 white
+
   UIItem
     id: Sprite
     anchors.fill: parent
     padding: 4
     @onClick: modules.game_forge.handleItemClick(self)
-  UIItem
+
+  UIWidget
     id: TierBadge
     anchors.top: parent.top
     anchors.right: parent.right
@@ -26,8 +33,8 @@ ForgeItem < UIWidget
 
 MainWindow
   text: Forge
-  height: 600
-  width: 1200
+  height: 450
+  width: 800
   padding-left: 50
   padding-right: 50
   padding-top: 40
@@ -62,40 +69,38 @@ MainWindow
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
-    padding: 0
     image-source: /images/ui/window_new
     image-border: 4
     height: 250
-    margin-top: 100
+    margin-top: 50
+    padding: 10
 
     Panel
       id: forgeItems
       anchors.top: parent.top
       anchos.left: parent.left
       height: 250
-      width: 400
-      padding: 7
-      padding-top: 18
+      width: 250
 
       UIScrollArea
         id: List
         anchors.fill: ItemListBase
         vertical-scrollbar: ListScrollbar
-        margin-top: 5
-        size: 400 225
+        size: 250 225
         image-border: 10
-        padding-top: 1
         padding-bottom: 1
         layout:
           type: grid
           cell-size: 45 55
           flow: true
+          cell-spacing: 5
 
       VerticalScrollBar
         id: ListScrollbar
         anchors.top: List.top
         anchors.right: List.right
         anchors.bottom: List.bottom
+        margin-top: 10
         step: 30
         pixel-scroll: true
 
