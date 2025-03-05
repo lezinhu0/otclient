@@ -176,7 +176,7 @@ QtButton < UIButton
   image-border: 3
   padding: 5 10 5 10
   opacity: 1.0
-  color: #b9b9b9ff
+  color: #ffffff
 
   $pressed:
     image-clip: 0 46 22 23

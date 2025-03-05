@@ -7,6 +7,7 @@ function init()
 
     connect(g_game, {
         onOpenForge = show,
+        onWalk = handleWalk,
         onGameEnd = hide
     })
 end
@@ -14,13 +15,19 @@ end
 function terminate()
     disconnect(g_game, {
         onOpenForge = show,
+        onWalk = handleWalk,
         onGameEnd = hide
     })
     forgeWindow:destroy()
     forgeWindow = nil
 end
 
+function handleWalk()
+    hide()
+end
+
 function hide()
+    forgeWindow:ungrabMouse()
     forgeWindow:hide()
 end
 
@@ -51,6 +58,8 @@ function show(forgeItems)
         end
     end
     forgeWindow:show()
+    forgeWindow:grabMouse()
+    forgeWindow:focus()
 end
 
 function destroyWindows()

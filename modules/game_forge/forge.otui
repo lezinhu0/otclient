@@ -77,13 +77,14 @@ MainWindow
     Panel
       id: forgeItems
       anchors.top: parent.top
-      anchos.left: parent.left
+      anchors.left: parent.left
       height: 140
       width: 250
 
       UIScrollArea
         id: List
-        anchors.fill: ItemListBase
+        anchors.top: parent.top
+        anchos.left: parent.left
         vertical-scrollbar: ListScrollbar
         size: 250 120
         image-border: 10
