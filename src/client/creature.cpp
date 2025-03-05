@@ -58,7 +58,7 @@ void Creature::onCreate() {
     callLuaField("onCreate");
 }
 
-void Creature::draw(const Point& dest, const bool drawThings, const LightViewPtr& /*lightView*/)
+void Creature::draw(const Point& dest, const bool drawThings, const LightViewPtr& /*lightView*/, const bool replaceShader)
 {
     if (!canBeSeen() || !canDraw())
         return;

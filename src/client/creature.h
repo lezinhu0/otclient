@@ -53,7 +53,7 @@ public:
     void onAppear() override;
     void onDisappear() override;
 
-    void draw(const Point& dest, bool drawThings = true, const LightViewPtr& lightView = nullptr) override;
+    void draw(const Point& dest, bool drawThings = true, const LightViewPtr& lightView = nullptr, const bool replaceShader = false) override;
     void draw(const Rect& destRect, uint8_t size, bool center = false);
     void drawLight(const Point& dest, const LightViewPtr& lightView) override;
 

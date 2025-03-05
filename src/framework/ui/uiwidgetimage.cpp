@@ -81,6 +81,8 @@ void UIWidget::parseImageStyle(const OTMLNodePtr& styleNode)
             setImageAutoResize(node->value<bool>());
         else if (node->tag() == "image-individual-animation")
             setImageIndividualAnimation(node->value<bool>());
+        else if (node->tag() == "image-replace-shader")
+            setReplaceShader(node->value<bool>());
     }
 }
 

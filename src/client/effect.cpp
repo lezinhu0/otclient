@@ -27,7 +27,7 @@
 #include <framework/core/eventdispatcher.h>
 #include <framework/core/graphicalapplication.h>
 
-void Effect::draw(const Point& dest, const bool drawThings, const LightViewPtr& lightView)
+void Effect::draw(const Point& dest, const bool drawThings, const LightViewPtr& lightView, const bool replaceShader)
 {
     if (!canDraw() || isHided())
         return;

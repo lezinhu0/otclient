@@ -75,7 +75,7 @@ class Item final : public Thing
 public:
     static ItemPtr create(int id);
 
-    void draw(const Point& dest, bool drawThings = true, const LightViewPtr& lightView = nullptr) override;
+    void draw(const Point& dest, bool drawThings = true, const LightViewPtr& lightView = nullptr, const bool replaceColorShader = false) override;
     void drawLight(const Point& dest, const LightViewPtr& lightView) override;
 
     void setId(uint32_t id) override;

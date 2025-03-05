@@ -26,10 +26,10 @@
 
 UIItem::UIItem() { setProp(PropDraggable, true, false); }
 
-void UIItem::drawSelf(const DrawPoolType drawPane)
-{
-    if (drawPane != DrawPoolType::FOREGROUND)
+void UIItem::drawSelf(const DrawPoolType drawPane) {
+    if (drawPane != DrawPoolType::FOREGROUND) {
         return;
+    }
 
     // draw style components in order
     if (m_backgroundColor.aF() > Fw::MIN_ALPHA) {
@@ -45,7 +45,8 @@ void UIItem::drawSelf(const DrawPoolType drawPane)
 
         g_drawPool.bindFrameBuffer(exactSize);
         m_item->setColor(m_color);
-        m_item->draw(Point(exactSize - g_gameConfig.getSpriteSize()) + m_item->getDisplacement());
+
+        m_item->draw(Point(exactSize - g_gameConfig.getSpriteSize()) + m_item->getDisplacement(), true, nullptr, getReplaceShader());
         g_drawPool.releaseFrameBuffer(getPaddingRect());
 
         if (m_font && (m_alwaysShowCount || m_item->isStackable() || m_item->isChargeable()) && m_item->getCountOrSubType() > 1) {

@@ -73,7 +73,8 @@ enum FlagProp : uint32_t
     PropImageIndividualAnimation = 1 << 23,
     PropUpdateChildrenIndexStates = 1 << 24,
     PropDisableUpdateTemporarily = 1 << 25,
-    PropOnHTML = 1 << 26
+    PropOnHTML = 1 << 26,
+    PropReplaceShader = 1 << 27,
 };
 
 // @bindclass
@@ -544,6 +545,7 @@ public:
     void setImageBorderBottom(const int border) { m_imageBorder.bottom = border; configureBorderImage(); }
     void setImageBorderLeft(const int border) { m_imageBorder.left = border; configureBorderImage(); }
     void setImageBorder(const int border) { m_imageBorder.set(border); configureBorderImage(); }
+    void setReplaceShader(const bool replaceShader) { setProp(PropReplaceShader, replaceShader); }
 
     std::string getImageSource() { return m_imageSource; }
     Rect getImageClip() { return m_imageClipRect; }
@@ -565,6 +567,7 @@ public:
     int getImageBorderLeft() { return m_imageBorder.left; }
     int getImageTextureWidth() { return m_imageTexture ? m_imageTexture->getWidth() : 0; }
     int getImageTextureHeight() { return m_imageTexture ? m_imageTexture->getHeight() : 0; }
+    bool getReplaceShader() { return hasProp(PropReplaceShader); }
 
     // text related
 private:

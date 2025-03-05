@@ -27,7 +27,7 @@
 #include <client/client.h>
 #include <framework/core/eventdispatcher.h>
 
-void Missile::draw(const Point& dest, const bool drawThings, const LightViewPtr& lightView)
+void Missile::draw(const Point& dest, const bool drawThings, const LightViewPtr& lightView, const bool replaceShader)
 {
     if (!canDraw() || isHided())
         return;

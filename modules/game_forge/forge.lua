@@ -3,7 +3,7 @@ local improveSucces = false
 
 function init()
     forgeWindow = g_ui.displayUI('forge')
-    -- forgeWindow:hide()
+    forgeWindow:hide()
 
     connect(g_game, {
         onOpenForge = show,
@@ -26,17 +26,18 @@ function handleWalk()
     hide()
 end
 
-function hide()
-    forgeWindow:ungrabMouse()
-    forgeWindow:hide()
-end
-
 function clearItems()
     local forgeItems = forgeWindow:recursiveGetChildrenByStyleName('ForgeItem')
     for _, forgeItem in ipairs(forgeItems) do
         forgeItem:destroy()
         forgeItem = nil
     end
+end
+
+function hide()
+    forgeWindow:ungrabMouse()
+    forgeWindow:ungrabKeyboard()
+    forgeWindow:hide()
 end
 
 function show(forgeItems)
@@ -58,8 +59,9 @@ function show(forgeItems)
         end
     end
     forgeWindow:show()
-    forgeWindow:grabMouse()
     forgeWindow:focus()
+    forgeWindow:grabMouse()
+    forgeWindow:grabKeyboard()
 end
 
 function destroyWindows()
@@ -82,6 +84,22 @@ function handleItemClick(self)
     for _, item in ipairs(items) do
         item:setOn(false)
     end
-    g_game.forgeFusionItem(self:getItem(), improveSucces)
+    local selectedItem = self:getItem()
+    local selectedItemSlot = forgeWindow:recursiveGetChildById('selectedItem')
+    selectedItemSlot:setItem(selectedItem)
+    local selectedItemBadge = forgeWindow:recursiveGetChildById('selectedItemBadge')
+    selectedItemBadge:setImageClip({
+        x = (selectedItem:getTier()) * 9,
+        y = 0,
+        width = 10,
+        height = 9
+    })
+    selectedItemBadge:setVisible(true)
+
+    -- g_game.forgeFusionItem(self:getItem(), improveSucces)
+    -- hide()
+end
+
+function handleFusionClick()
     hide()
 end

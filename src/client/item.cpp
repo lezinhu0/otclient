@@ -40,7 +40,7 @@ ItemPtr Item::create(const int id)
     return item;
 }
 
-void Item::draw(const Point& dest, const bool drawThings, const LightViewPtr& lightView)
+void Item::draw(const Point& dest, const bool drawThings, const LightViewPtr& lightView, const bool replaceColorShader)
 {
     if (!canDraw(m_color) || isHided())
         return;
@@ -51,9 +51,9 @@ void Item::draw(const Point& dest, const bool drawThings, const LightViewPtr& li
     internalDraw(animationPhase, dest, m_color, drawThings, false, lightView);
 
     if (isMarked())
-        internalDraw(animationPhase, dest, getMarkedColor(), drawThings, true);
+        internalDraw(animationPhase, dest, getMarkedColor(), drawThings, replaceColorShader);
     else if (isHighlighted())
-        internalDraw(animationPhase, dest, getHighlightColor(), drawThings, true);
+        internalDraw(animationPhase, dest, getHighlightColor(), drawThings, replaceColorShader);
 }
 
 void Item::internalDraw(const int animationPhase, const Point& dest, const Color& color, const bool drawThings, const bool replaceColorShader, const LightViewPtr& lightView)

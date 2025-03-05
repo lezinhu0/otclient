@@ -931,6 +931,7 @@ void Client::registerLuaFunctions()
     g_lua.bindClassMemberFunction<UIItem>("getItem", &UIItem::getItem);
     g_lua.bindClassMemberFunction<UIItem>("isVirtual", &UIItem::isVirtual);
     g_lua.bindClassMemberFunction<UIItem>("isItemVisible", &UIItem::isItemVisible);
+    g_lua.bindClassMemberFunction<UIItem>("setReplaceShader", &UIItem::setReplaceShader);
 
     g_lua.registerClass<UIEffect, UIWidget>();
     g_lua.bindClassStaticFunction<UIEffect>("create", [] { return std::make_shared<UIEffect>(); });

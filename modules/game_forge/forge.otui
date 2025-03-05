@@ -16,6 +16,7 @@ ForgeItem < UIWidget
     id: Sprite
     anchors.fill: parent
     padding: 4
+    !virtual: true
     @onClick: modules.game_forge.handleItemClick(self)
 
   UIWidget
@@ -60,7 +61,7 @@ MainWindow
     text: History
 
   Panel
-    id: pages
+    id: forgeMenu
     height: 50
     anchors.top: parent.top
     anchors.left: parent.left
@@ -105,15 +106,66 @@ MainWindow
         pixel-scroll: true
       
     Panel
-      id: ForgeItemsProperties
+      id: ForgeItemsMiddle
       anchors.top: parent.top
       anchors.left: forgeItems.right
+      anchors.right: ForgeItemsProperties.left
+      height: 110
+      margin-left: 10
+      margin-right: 10
+      margin-top: 10
+
+      UIWidget
+        anchors.fill: parent
+        margin: 30
+        image-source: /images/game/actionbar/icon-arrow-right.png
+
+    Panel
+      id: ForgeItemsProperties
+      anchors.top: parent.top
+      anchors.right: parent.right
       margin-left: 10
       margin-top: 10
-      background-color: #ffffff20
-      size: 423 110
+      size: 250 110
+      padding: 5
+      
+      UIItem
+        id: selectedItem
+        anchors.fill: parent
+        padding: 15 85 15 85
+        !virtual: true
+        !image-replace-shader: true
+        color: black
 
+        UIWidget
+          id: selectedItemBadge
+          visible: false
+          anchors.top: parent.top
+          anchors.right: parent.right
+          margin-top: 0
+          margin-right: 0
+          image-source: /images/inventory/tiers-strip
+          size: 18 20
 
+  Panel
+    id: forgeFusionConsumables
+    height: 50
+    anchors.top: forgeMenu.bottom
+    anchors.left: forgeMenu.left
+    anchors.right: forgeMenu.right
+    image-source: /images/ui/window_new
+    image-border: 4
+    height: 100
+    margin-top: 10
+    padding: 25 15 15 15
+    text-offset: 0 -42
+    text: Forge enhancements
+    color: #BFBFBF
+
+    Panel
+      id: coreAditionContainer
+      background-color: #ffffff
+      size: 60 60
 
 
   Button
