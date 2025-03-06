@@ -265,7 +265,7 @@ void ProtocolGame::parseMessage(const InputMessagePtr& msg)
                     break;
                 case Proto::GameServerItemClasses:
                     if (g_game.getClientVersion() >= 1281) {
-                        parseItemClasses(msg);
+                        parseForgingData(msg);
                     } else {
                         parseCreatureMark(msg);
                     }
@@ -1855,25 +1855,27 @@ void ProtocolGame::parseDistanceMissile(const InputMessagePtr& msg)
     g_map.addThing(missile, fromPos);
 }
 
-void ProtocolGame::parseItemClasses(const InputMessagePtr& msg)
-{
+void ProtocolGame::parseForgingData(const InputMessagePtr& msg) {
+    std::map<uint8_t, std::map<uint8_t, uint64_t>> tierUpgradePrices;
+
     const uint8_t classSize = msg->getU8();
     for (auto i = 0; i < classSize; ++i) {
-        msg->getU8(); // class id
-
+        auto classId = msg->getU8(); // class id
         // tiers
         const uint8_t tiersSize = msg->getU8();
         for (auto j = 0; j < tiersSize; ++j) {
-            msg->getU8(); // tier id
-            msg->getU64(); // upgrade cost
+            auto tier = msg->getU8(); // tier id
+            auto upgradeCost = msg->getU64(); // upgrade cost
+
+            tierUpgradePrices[classId][tier] = upgradeCost;
         }
     }
 
     if (g_game.getFeature(Otc::GameDynamicForgeVariables)) {
         const uint8_t grades = msg->getU8();
         for (auto i = 0; i < grades; ++i) {
-            msg->getU8(); // Tier
-            msg->getU8(); // Exalted cores
+            auto tier = msg->getU8(); // Tier
+            auto cores = msg->getU8(); // Exalted cores
         }
 
         if (g_game.getFeature(Otc::GameForgeConvergence)) {
@@ -1893,7 +1895,7 @@ void ProtocolGame::parseItemClasses(const InputMessagePtr& msg)
         }
 
         msg->getU8(); // Dust Percent
-        msg->getU8(); // Dust To Sleaver
+        msg->getU8(); // Dust To Sliver
         msg->getU8(); // Sliver To Core
         msg->getU8(); // Dust Percent Upgrade
         if (g_game.getClientVersion() >= 1316) {
@@ -1928,6 +1930,8 @@ void ProtocolGame::parseItemClasses(const InputMessagePtr& msg)
             msg->getU8(); // Forge values
         }
     }
+
+    g_game.processForgingData(tierUpgradePrices);
 }
 
 void ProtocolGame::parseCreatureMark(const InputMessagePtr& msg)

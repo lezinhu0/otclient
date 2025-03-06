@@ -529,6 +529,7 @@ protected:
     static void processBosstiaryInfo(const std::vector<BosstiaryData>& boss);
     static void processBosstiarySlots(const BosstiarySlotsData& data);
     static void processOpenForge(const std::vector<ItemPtr> forgeItems);
+    static void processForgingData(const std::map<uint8_t, std::map<uint8_t, uint64_t>> tierUpgradePrices);
 
     friend class ProtocolGame;
     friend class Map;

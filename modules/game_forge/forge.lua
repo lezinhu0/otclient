@@ -3,6 +3,9 @@ local improveSucces = false
 local items = {}
 local useCore = false
 local selectedItem = nil
+local tierUpgradeCosts = {}
+local fusionPrice = 0
+local playerCurrentCores = 0;
 
 function init()
     forgeWindow = g_ui.displayUI('forge')
@@ -12,6 +15,7 @@ function init()
         onOpenForge = show,
         forgeLoadItems = loadItems,
         onResourcesBalanceChange = updatePlayerResources,
+        onProcessForgingData = processForgingData,
         onWalk = handleWalk,
         onGameEnd = hide
     })
@@ -22,6 +26,7 @@ function terminate()
         onOpenForge = show,
         forgeLoadItems = loadItems,
         onResourcesBalanceChange = updatePlayerResources,
+        onProcessForgingData = processForgingData,
         onWalk = handleWalk,
         onGameEnd = hide
     })
@@ -31,6 +36,10 @@ end
 
 function handleWalk()
     hide()
+end
+
+function processForgingData(newTierUpgradeCosts)
+    tierUpgradeCosts = newTierUpgradeCosts
 end
 
 function clearItems()
@@ -48,14 +57,14 @@ function hide()
 end
 
 function updatePlayerResources()
-    print('\n\n\n\nhandling update player resources')
+    playerCurrentCores = g_game.getLocalPlayer():getResourceBalance(RESOURCE_FORGE_CORES)
     drawForge()
 end
 
 function drawForge()
     local useCoreButton = forgeWindow:recursiveGetChildById('useCoreButton'):setOn(useCore)
     local selectedItemSlot = forgeWindow:recursiveGetChildById('selectedItem'):setItem(selectedItem)
-    forgeWindow:recursiveGetChildById('totalCoresLabel'):setText(g_game.getLocalPlayer():getResourceBalance(RESOURCE_FORGE_CORES))
+    forgeWindow:recursiveGetChildById('totalCoresLabel'):setText(playerCurrentCores)
 
     local items = forgeWindow:recursiveGetChildrenByStyleName("ForgeItem")
     for _, item in ipairs(items) do
@@ -75,12 +84,15 @@ function drawForge()
         selectedItemBadge:setVisible(false)
     end
 
+    local fusionGoldValueLabel = forgeWindow:recursiveGetChildById('fusionGoldValueLabel')
+    fusionGoldValueLabel:setText(fusionPrice)
+
     local successRateValueLabel = forgeWindow:recursiveGetChildById('successRateValueLabel')
     successRateValueLabel:setText(useCore and '100%' or '50%')
     successRateValueLabel:setColor(useCore and 'green' or 'red')
 
     local fusionButton = forgeWindow:recursiveGetChildById('fusionButton')
-    if selectedItem and g_game.getLocalPlayer() and g_game.getLocalPlayer():getTotalMoney()  then
+    if selectedItem and g_game.getLocalPlayer():getTotalMoney() >= fusionPrice then
         fusionButton:enable()
     else
         fusionButton:disable()
@@ -137,6 +149,11 @@ function handleItemClick(self)
         itemSprite:setOn(false)
     end
     self:setOn(true)
+
+    local itemClassification = selectedItem:getClassification()
+    local itemTier = selectedItem:getTier()
+
+    fusionPrice = tierUpgradeCosts[itemClassification][itemTier]
     drawForge()
 end
 
@@ -146,6 +163,8 @@ function handleFusionClick()
 end
 
 function handleCoreClick()
+    if playerCurrentCores <= 0 then return end
+
     useCore = not useCore
     drawForge()
 end

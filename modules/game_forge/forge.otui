@@ -220,8 +220,28 @@ MainWindow
       anchors.top: parent.top
       anchors.bottom: parent.bottom
       width: 150
-      text: fusion
       @onClick: handleFusionClick()
+      text: Fusion
+      text-offset: 0 -5
+
+      UIItem
+        id: fusionGoldIcon
+        item-id: 3031
+        size: 32 32
+        anchors.top: parent.top
+        anchors.left: parent.left
+        margin-top: 20
+        margin-left: 26
+        phantom: true
+        virtual: true
+      
+      Label
+        id: fusionGoldValueLabel
+        anchors.bottom: fusionGoldIcon.bottom
+        anchors.left: fusionGoldIcon.right
+        margin-left: -5
+        margin-bottom: 10
+        width: 60
 
   Button
     id: closeButton
