@@ -72,9 +72,9 @@ local function drawFusionPage()
     local selectedItemSlot = forgeWindow:recursiveGetChildById('selectedItem'):setItem(selectedItem)
     forgeWindow:recursiveGetChildById('totalCoresLabel'):setText(playerCurrentCores)
 
-    local items = forgeWindow:recursiveGetChildrenByStyleName("ForgeItem")
-    for _, item in ipairs(items) do
-        item:setOn(selectedItem and selectedItem:getId() == item:getId())
+    local itemSprites = forgeWindow:recursiveGetChildrenByStyleName('ForgeItemSprite')
+    for _, itemSprite in ipairs(itemSprites) do
+        itemSprite:setOn(selectedItem and itemSprite:getItem() and itemSprite:getItem():getId() == selectedItem:getId() and selectedItem:getTier() == itemSprite:getItem():getTier())
     end
 
     local selectedItemBadge = forgeWindow:recursiveGetChildById('selectedItemBadge')
@@ -169,11 +169,6 @@ end
 
 function handleItemClick(self)
     selectedItem = self:getItem()
-    local itemSprites = forgeWindow:recursiveGetChildrenByStyleName('ForgeItemSprite')
-    for _, itemSprite in ipairs(itemSprites) do
-        itemSprite:setOn(false)
-    end
-    self:setOn(true)
 
     local itemClassification = selectedItem:getClassification()
     local itemTier = selectedItem:getTier()
