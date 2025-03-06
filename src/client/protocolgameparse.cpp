@@ -904,7 +904,31 @@ void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const
             auto itemTier = msg->getU8();
             auto itemCount = msg->getU16();
         }
+
+        auto receiveTierTotalItemCount = msg->getU16();
+        for (int j = 0; j < receiveTierTotalItemCount; j++) {
+            auto itemId = msg->getU16();
+            auto itemCount = msg->getU16();
+        }
     }
+
+    auto convergenceTransferCount = msg->getU8();
+    for (uint32_t i = 0; i < convergenceTransferCount; i++) {
+        auto donorCount = msg->getU16();
+        for (uint32_t j = 0; j < donorCount; j++) {
+            auto itemId = msg->getU16();
+            auto tier = msg->getU8();
+            auto itemCount = msg->getU16();
+        }
+
+        auto receiverItemsCount = msg->getU16();
+        for (uint32_t k = 0; k < receiverItemsCount; k++) {
+            auto itemId = msg->getU16();
+            auto itemCount = msg->getU16();
+        }
+    }
+
+    auto dustLevel = msg->getU16();
 
     g_game.processOpenForge(forgeItems);
 }
