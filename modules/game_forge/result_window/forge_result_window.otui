@@ -3,3 +3,49 @@ MainWindow
   background-color: red
   text: Forge Result
   lock: true
+
+  UIItem
+    id: leftPanel
+    item-id: 3381
+    size: 80 80
+    anchors.top: parent.top
+    anchors.left: parent.left
+    margin-top: 30
+    margin-left: 10
+
+  UIWidget
+    id: centerPanel
+    size: 170 80
+    anchors.top: parent.top
+    anchors.left: leftPanel.right
+    margin-top: 30
+    margin-left: 10
+    padding-top: 15
+    layout:
+      type: grid
+      cell-size: 50 50
+      flow: true
+      cell-spacing: 10
+
+    UIWidget
+      id: firstStepIcon
+      background-color: black
+
+    UIWidget
+      id: secondStepIcon
+      background-color: black
+
+    UIWidget
+      id: thirdStepIcon
+      background-color: black
+
+  UIItem
+    id: rightPanel
+    item-id: 3381
+    size: 80 80
+    anchors.top: parent.top
+    anchors.left: centerPanel.right
+    margin-top: 30
+    margin-left: 10
+    repalce-shader: true
+    color: black

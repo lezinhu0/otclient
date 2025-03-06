@@ -860,6 +860,8 @@ void ProtocolGame::parseForgeResult(const InputMessagePtr& msg) const
         auto keptItemId = msg->getU16();
         auto keptItemTier = msg->getU8();
     }
+
+    
 }
 
 void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const

@@ -178,14 +178,8 @@ function handleItemClick(self)
 end
 
 function handleFusionClick()
-    -- g_game.forgeFusionItem(selectedItem, useCore)
+    g_game.forgeFusionItem(selectedItem, useCore)
     hide()
-
-    local result = {}
-    result.bonus = 0
-    result.sucess = true
-
-    showForgeResult()
 end
 
 function handleCoreClick()
