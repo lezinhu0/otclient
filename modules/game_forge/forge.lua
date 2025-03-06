@@ -1,5 +1,8 @@
 local forgeWindow = nil
 local improveSucces = false
+local items = {}
+local useCore = false
+local selectedItem = nil
 
 function init()
     forgeWindow = g_ui.displayUI('forge')
@@ -7,6 +10,8 @@ function init()
 
     connect(g_game, {
         onOpenForge = show,
+        forgeLoadItems = loadItems,
+        onResourcesBalanceChange = updatePlayerResources,
         onWalk = handleWalk,
         onGameEnd = hide
     })
@@ -15,6 +20,8 @@ end
 function terminate()
     disconnect(g_game, {
         onOpenForge = show,
+        forgeLoadItems = loadItems,
+        onResourcesBalanceChange = updatePlayerResources,
         onWalk = handleWalk,
         onGameEnd = hide
     })
@@ -40,7 +47,59 @@ function hide()
     forgeWindow:hide()
 end
 
-function show(forgeItems)
+function updatePlayerResources()
+    print('\n\n\n\nhandling update player resources')
+    drawForge()
+end
+
+function drawForge()
+    local useCoreButton = forgeWindow:recursiveGetChildById('useCoreButton'):setOn(useCore)
+    local selectedItemSlot = forgeWindow:recursiveGetChildById('selectedItem'):setItem(selectedItem)
+    forgeWindow:recursiveGetChildById('totalCoresLabel'):setText(g_game.getLocalPlayer():getResourceBalance(RESOURCE_FORGE_CORES))
+
+    local items = forgeWindow:recursiveGetChildrenByStyleName("ForgeItem")
+    for _, item in ipairs(items) do
+        item:setOn(selectedItem and selectedItem:getId() == item:getId())
+    end
+
+    local selectedItemBadge = forgeWindow:recursiveGetChildById('selectedItemBadge')
+    if selectedItem then
+        selectedItemBadge:setVisible(true)
+        selectedItemBadge:setImageClip({
+            x = (selectedItem:getTier()) * 9,
+            y = 0,
+            width = 10,
+            height = 9
+        })
+    else
+        selectedItemBadge:setVisible(false)
+    end
+
+    local successRateValueLabel = forgeWindow:recursiveGetChildById('successRateValueLabel')
+    successRateValueLabel:setText(useCore and '100%' or '50%')
+    successRateValueLabel:setColor(useCore and 'green' or 'red')
+
+    local fusionButton = forgeWindow:recursiveGetChildById('fusionButton')
+    if selectedItem and g_game.getLocalPlayer() and g_game.getLocalPlayer():getTotalMoney()  then
+        fusionButton:enable()
+    else
+        fusionButton:disable()
+    end
+end
+
+function show()
+    useCore = false
+    selectedItem = nil
+    print(string.format('Total cores for player: %d', g_game.getLocalPlayer():getResourceBalance(RESOURCE_FORGE_CORES)))
+
+    forgeWindow:show()
+    forgeWindow:focus()
+    forgeWindow:grabMouse()
+    forgeWindow:grabKeyboard()
+    drawForge()
+end
+
+function loadItems(forgeItems)
     clearItems()
     local listWidget = forgeWindow:recursiveGetChildById("List")
     for _, item in ipairs(forgeItems) do
@@ -58,10 +117,6 @@ function show(forgeItems)
             })
         end
     end
-    forgeWindow:show()
-    forgeWindow:focus()
-    forgeWindow:grabMouse()
-    forgeWindow:grabKeyboard()
 end
 
 function destroyWindows()
@@ -72,34 +127,29 @@ function destroyWindows()
 end
 
 function handleButtonClick(self)
-    local buttons = forgeWindow:recursiveGetChildrenByStyleName("SectionButton")
-    for _, button in ipairs(buttons) do
-        button:setOn(false)
-    end
     self:setOn(not self:isOn())
 end
 
 function handleItemClick(self)
-    local items = forgeWindow:recursiveGetChildrenByStyleName("ForgeItem")
-    for _, item in ipairs(items) do
-        item:setOn(false)
+    selectedItem = self:getItem()
+    local itemSprites = forgeWindow:recursiveGetChildrenByStyleName('ForgeItemSprite')
+    for _, itemSprite in ipairs(itemSprites) do
+        itemSprite:setOn(false)
     end
-    local selectedItem = self:getItem()
-    local selectedItemSlot = forgeWindow:recursiveGetChildById('selectedItem')
-    selectedItemSlot:setItem(selectedItem)
-    local selectedItemBadge = forgeWindow:recursiveGetChildById('selectedItemBadge')
-    selectedItemBadge:setImageClip({
-        x = (selectedItem:getTier()) * 9,
-        y = 0,
-        width = 10,
-        height = 9
-    })
-    selectedItemBadge:setVisible(true)
-
-    -- g_game.forgeFusionItem(self:getItem(), improveSucces)
-    -- hide()
+    self:setOn(true)
+    drawForge()
 end
 
 function handleFusionClick()
+    g_game.forgeFusionItem(selectedItem, useCore)
     hide()
+end
+
+function handleCoreClick()
+    useCore = not useCore
+    drawForge()
+end
+
+function getTotalCores()
+    return g_game.getLocalPlayer():getResourceBalance(RESOURCE_FORGE_CORES)
 end

@@ -906,7 +906,6 @@ void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const
         }
     }
 
-
     g_game.processOpenForge(forgeItems);
 }
 

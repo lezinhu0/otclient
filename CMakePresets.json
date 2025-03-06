@@ -19,7 +19,7 @@
         },
         "BUILD_STATIC_LIBRARY": "ON",
         "VCPKG_TARGET_TRIPLET": "x64-windows-static",
-        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "OPTIONS_ENABLE_SCCACHE": "ON"
       },
       "architecture": {
@@ -76,20 +76,35 @@
     },
     {
       "name": "windows-debug",
-      "inherits": "windows-release",
       "displayName": "Windows - Debug",
-      "description": "Build Debug Mode",
+      "description": "Sets Ninja generator, compilers, build and install directory and set build type as release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
-        "CMAKE_CXX_FLAGS_DEBUG": "-g -O0 -fno-omit-frame-pointer -fno-inline",
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        },
+        "BUILD_STATIC_LIBRARY": "ON",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static",
         "CMAKE_BUILD_TYPE": "Debug",
-        "DEBUG_LOG": "ON",
-        "ASAN_ENABLED": "ON",
-        "BUILD_STATIC_LIBRARY": "OFF",
-        "VCPKG_TARGET_TRIPLET": "x64-windows"
+        "OPTIONS_ENABLE_SCCACHE": "ON"
       },
       "architecture": {
         "value": "x64",
         "strategy": "external"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ]
+        }
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
       }
     },
     {

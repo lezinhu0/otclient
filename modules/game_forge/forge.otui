@@ -1,3 +1,5 @@
+ForgeItemSprite < UIItem
+
 SectionButton < Button
   width: 175
   height: 40
@@ -12,12 +14,16 @@ ForgeItem < UIWidget
   margin-top: 10
   size: 45 55
 
-  UIItem
+  ForgeItemSprite
     id: Sprite
     anchors.fill: parent
     padding: 4
-    !virtual: true
+    virtual: true
     @onClick: modules.game_forge.handleItemClick(self)
+    border: 0 alpha
+
+    $on:
+      border: 1 white
 
   UIWidget
     id: TierBadge
@@ -35,6 +41,7 @@ MainWindow
   padding-left: 50
   padding-right: 50
   padding-top: 40
+  @onEscape: hide()
 
   SectionButton
     id: forgeButton
@@ -133,7 +140,7 @@ MainWindow
         id: selectedItem
         anchors.fill: parent
         padding: 15 85 15 85
-        !virtual: true
+        virtual: true
         !image-replace-shader: true
         color: black
 
@@ -164,9 +171,57 @@ MainWindow
 
     Panel
       id: coreAditionContainer
-      background-color: #ffffff
       size: 60 60
 
+      Button
+        id: useCoreButton
+        anchors.fill: parent
+        @onClick: handleCoreClick()
+        
+        $on:
+          image-clip: 0 46 22 23
+          text-offset: 1 1
+
+        UIItem
+          item-id: 37110
+          anchors.fill: parent
+          virtual: true
+          phantom: true
+
+    Label
+      id: sucessRateLabel
+      text: Success rate:
+      anchors.left: coreAditionContainer.right
+      anchors.top: coreAditionContainer.top
+      margin-left: 10
+      margin-top: 8
+
+    Label
+      id: successRateValueLabel
+      text: 50%
+      anchors.left: coreAditionContainer.right
+      anchors.top: sucessRateLabel.bottom
+      margin-top: 5
+      margin-left: 10
+      color: red
+      width: 40
+
+    Label
+      id: totalCoresLabel
+      anchors.left: coreAditionContainer.right
+      anchors.top: successRateValueLabel.bottom
+      margin-top: 5
+      margin-left: 10
+      width: 40
+    
+    Button
+      id: fusionButton
+      anchors.right: parent.right
+      anchors.top: parent.top
+      anchors.bottom: parent.bottom
+      width: 150
+      text: fusion
+      @onClick: handleFusionClick()
 
   Button
     id: closeButton
