@@ -530,6 +530,8 @@ protected:
     static void processBosstiarySlots(const BosstiarySlotsData& data);
     static void processOpenForge(const std::vector<ItemPtr> forgeItems);
     static void processForgingData(const std::map<uint8_t, std::map<uint8_t, uint64_t>> tierUpgradePrices);
+    static void processForgeResult(const int actionType, const bool convergence, const bool success, const uint16_t leftItemId, const uint8_t leftItemTier,
+        const uint16_t rightItemId, const uint8_t rightItemTier, const uint8_t bonus, const uint8_t coreCount, const uint16_t keptItemId, const uint8_t keptItemIter);
 
     friend class ProtocolGame;
     friend class Map;

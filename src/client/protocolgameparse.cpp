@@ -844,16 +844,15 @@ void ProtocolGame::parseCoinBalanceUpdating(const InputMessagePtr& msg)
 
 void ProtocolGame::parseForgeResult(const InputMessagePtr& msg) const
 {
-    g_logger.info("ProtocolGame::parseForgeResult - TODO handle forge result here!");
-
-    auto actionType = msg->getU8();
-    bool convergence = msg->getU8();
+    auto actionType = msg->getU8(); // 0 = fusion | 1 = tranfer
+    bool convergence = msg->getU8(); // isConvergence
     bool success = msg->getU8();
     auto leftItemId = msg->getU16();
     auto leftItemTier = msg->getU8();
     auto rightItemId = msg->getU16();
     auto rightItemTier = msg->getU8();
     uint8_t bonus = msg->getU8();
+
     if (bonus == 2) { //core kept
         auto coreCount = msg->getU8();
     } else if (bonus >= 4 && bonus <= 8) {
@@ -861,7 +860,7 @@ void ProtocolGame::parseForgeResult(const InputMessagePtr& msg) const
         auto keptItemTier = msg->getU8();
     }
 
-    
+    g_game.processForgeResult(actionType, convergence, success, leftItemId, leftItemTier, rightItemId, rightItemTier, bonus, coreCount, keptItemId, keptItemIter);
 }
 
 void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const

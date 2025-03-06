@@ -22,6 +22,7 @@ function init()
         forgeLoadItems = loadItems,
         onResourcesBalanceChange = updatePlayerResources,
         onProcessForgingData = processForgingData,
+        onProcessForgeResult = processForgeResult,
         onWalk = handleWalk,
         onGameEnd = hide
     })
@@ -184,11 +185,14 @@ end
 
 function handleCoreClick()
     if playerCurrentCores <= 0 then return end
-
     useCore = not useCore
     drawForge()
 end
 
 function getTotalCores()
     return g_game.getLocalPlayer():getResourceBalance(RESOURCE_FORGE_CORES)
+end
+
+function processForgeResult(result)
+    print("handling forge result xd")
 end
