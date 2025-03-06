@@ -595,8 +595,8 @@ void Game::processOpenForge(const std::vector<ItemPtr> forgeItems)
     g_lua.callGlobalField("g_game", "onOpenForge");
 }
 
-void Game::processForgeResult(const int actionType, const bool convergence, const bool success, const uint16_t leftItemId, const uint8_t leftItemTier, const uint16_t rightItemId, const uint8_t rightItemTier, const uint8_t bonus, const uint8_t coreCount, const uint16_t keptItemId, const uint8_t keptItemIter) {
-    g_lua.callGlobalField("g_game", "onProcessForgeResult", actionType, convergence, success, leftItemId, leftItemTier, rightItemId, rightItemTier, bonus, coreCount, keptItemId, keptItemIter);
+void Game::processForgeResult(const int actionType, const bool convergence, const bool success, const uint16_t leftItemId, const uint8_t leftItemTier, const uint16_t rightItemId, const uint8_t rightItemTier, const uint8_t bonus, const uint8_t coreCount, const uint16_t keptItemId, const uint8_t keptItemTier) {
+    g_lua.callGlobalField("g_game", "onProcessForgeResult", actionType, convergence, success, leftItemId, leftItemTier, rightItemId, rightItemTier, bonus, coreCount, keptItemId, keptItemTier);
 }
 
 void Game::processForgingData(const std::map<uint8_t, std::map<uint8_t, uint64_t>> tierUpgradePrices)

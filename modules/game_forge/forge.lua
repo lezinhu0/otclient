@@ -13,6 +13,8 @@ local fusionPrice = 0
 local playerCurrentCores = 0;
 local currentPage = CONST_PAGE_FUSION
 
+showingResult = false
+
 function init()
     forgeWindow = g_ui.displayUI('forge')
     forgeWindow:hide()
@@ -34,6 +36,7 @@ function terminate()
         forgeLoadItems = loadItems,
         onResourcesBalanceChange = updatePlayerResources,
         onProcessForgingData = processForgingData,
+        onProcessForgeResult = processForgeResult,
         onWalk = handleWalk,
         onGameEnd = hide
     })
@@ -123,6 +126,8 @@ function drawForge()
 end
 
 function show()
+    if showingResult then return end
+
     if not forgeWindow:isVisible() then
         currentPage = CONST_PAGE_FUSION
         useCore = false
@@ -193,6 +198,7 @@ function getTotalCores()
     return g_game.getLocalPlayer():getResourceBalance(RESOURCE_FORGE_CORES)
 end
 
-function processForgeResult(result)
-    print("handling forge result xd")
+function processForgeResult(actionType, convergence, success, leftItemId, leftItemTier, rightItemId, rightItemTier, bonus, coreCount, keptItemId, keptItemTier)
+    showingResult = true
+    showForgeResult(actionType, convergence, success, leftItemId, leftItemTier, rightItemId, rightItemTier, bonus, coreCount, keptItemId, keptItemTier)
 end

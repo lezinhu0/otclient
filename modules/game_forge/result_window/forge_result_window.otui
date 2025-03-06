@@ -5,7 +5,7 @@ MainWindow
   lock: true
 
   UIItem
-    id: leftPanel
+    id: leftItemSlot
     item-id: 3381
     size: 80 80
     anchors.top: parent.top
@@ -17,7 +17,7 @@ MainWindow
     id: centerPanel
     size: 170 80
     anchors.top: parent.top
-    anchors.left: leftPanel.right
+    anchors.left: leftItemSlot.right
     margin-top: 30
     margin-left: 10
     padding-top: 15
@@ -40,12 +40,12 @@ MainWindow
       background-color: black
 
   UIItem
-    id: rightPanel
+    id: rightItemSlot
     item-id: 3381
     size: 80 80
     anchors.top: parent.top
     anchors.left: centerPanel.right
     margin-top: 30
     margin-left: 10
-    repalce-shader: true
-    color: black
+    image-replace-shader: true
+    color: red

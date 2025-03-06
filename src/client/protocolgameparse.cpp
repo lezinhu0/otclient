@@ -853,14 +853,18 @@ void ProtocolGame::parseForgeResult(const InputMessagePtr& msg) const
     auto rightItemTier = msg->getU8();
     uint8_t bonus = msg->getU8();
 
+    uint8_t coreCount = 0;
+    uint16_t keptItemId = 0;
+    uint8_t keptItemTier = 0;
+
     if (bonus == 2) { //core kept
-        auto coreCount = msg->getU8();
+        coreCount = msg->getU8();
     } else if (bonus >= 4 && bonus <= 8) {
-        auto keptItemId = msg->getU16();
-        auto keptItemTier = msg->getU8();
+        keptItemId = msg->getU16();
+        keptItemTier = msg->getU8();
     }
 
-    g_game.processForgeResult(actionType, convergence, success, leftItemId, leftItemTier, rightItemId, rightItemTier, bonus, coreCount, keptItemId, keptItemIter);
+    g_game.processForgeResult(actionType, convergence, success, leftItemId, leftItemTier, rightItemId, rightItemTier, bonus, coreCount, keptItemId, keptItemTier);
 }
 
 void ProtocolGame::parseOpenForge(const InputMessagePtr& msg) const
