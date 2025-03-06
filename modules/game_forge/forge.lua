@@ -1,3 +1,8 @@
+local CONST_PAGE_RESULT = 'CONST_PAGE_RESULT'
+local CONST_PAGE_FUSION = 'CONST_PAGE_FUSION'
+local CONST_PAGE_CONVERSION = 'CONST_PAGE_CONVERSION'
+local CONST_PAGE_HISTORY = 'CONST_PAGE_HISTORY'
+
 local forgeWindow = nil
 local improveSucces = false
 local items = {}
@@ -6,6 +11,7 @@ local selectedItem = nil
 local tierUpgradeCosts = {}
 local fusionPrice = 0
 local playerCurrentCores = 0;
+local currentPage = CONST_PAGE_FUSION
 
 function init()
     forgeWindow = g_ui.displayUI('forge')
@@ -61,7 +67,7 @@ function updatePlayerResources()
     drawForge()
 end
 
-function drawForge()
+local function drawFusionPage()
     local useCoreButton = forgeWindow:recursiveGetChildById('useCoreButton'):setOn(useCore)
     local selectedItemSlot = forgeWindow:recursiveGetChildById('selectedItem'):setItem(selectedItem)
     forgeWindow:recursiveGetChildById('totalCoresLabel'):setText(playerCurrentCores)
@@ -72,6 +78,7 @@ function drawForge()
     end
 
     local selectedItemBadge = forgeWindow:recursiveGetChildById('selectedItemBadge')
+    selectedItemBadge:setVisible(false)
     if selectedItem then
         selectedItemBadge:setVisible(true)
         selectedItemBadge:setImageClip({
@@ -80,8 +87,6 @@ function drawForge()
             width = 10,
             height = 9
         })
-    else
-        selectedItemBadge:setVisible(false)
     end
 
     local fusionGoldValueLabel = forgeWindow:recursiveGetChildById('fusionGoldValueLabel')
@@ -97,17 +102,36 @@ function drawForge()
     else
         fusionButton:disable()
     end
+
+    forgeWindow:recursiveGetChildById('fusionPage'):setVisible(true)
+end
+
+function drawForge()
+    local fusionPage = forgeWindow:recursiveGetChildById('fusionPage')
+    fusionPage:setVisible(false)
+
+    local sectionButtons = forgeWindow:recursiveGetChildrenByStyleName('SectionButton')
+    for _, button in ipairs(sectionButtons) do
+        button:setOn(currentPage == button:getId())
+    end
+
+    if currentPage == CONST_PAGE_FUSION then
+        drawFusionPage()
+    end
+
 end
 
 function show()
-    useCore = false
-    selectedItem = nil
-    print(string.format('Total cores for player: %d', g_game.getLocalPlayer():getResourceBalance(RESOURCE_FORGE_CORES)))
-
-    forgeWindow:show()
-    forgeWindow:focus()
-    forgeWindow:grabMouse()
-    forgeWindow:grabKeyboard()
+    if not forgeWindow:isVisible() then
+        currentPage = CONST_PAGE_FUSION
+        useCore = false
+        selectedItem = nil
+    
+        forgeWindow:show()
+        forgeWindow:focus()
+        forgeWindow:grabMouse()
+        forgeWindow:grabKeyboard()
+    end
     drawForge()
 end
 
@@ -139,7 +163,8 @@ function destroyWindows()
 end
 
 function handleButtonClick(self)
-    self:setOn(not self:isOn())
+    currentPage = self:getId()
+    drawForge()
 end
 
 function handleItemClick(self)
@@ -158,8 +183,14 @@ function handleItemClick(self)
 end
 
 function handleFusionClick()
-    g_game.forgeFusionItem(selectedItem, useCore)
+    -- g_game.forgeFusionItem(selectedItem, useCore)
     hide()
+
+    local result = {}
+    result.bonus = 0
+    result.sucess = true
+
+    showForgeResult()
 end
 
 function handleCoreClick()

@@ -4,6 +4,6 @@ Module
   author: lezinhu0
   website: https://github.com/edubart/otclient
   sandboxed: true
-  scripts: [ forge ]
+  scripts: [ forge, result_window/forge_result_window ]
   @onLoad: init()
   @onUnload: terminate()
