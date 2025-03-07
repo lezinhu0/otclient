@@ -14,23 +14,50 @@ local m_keptItemTier
 local step = 0
 
 local function nextStep()
-    local nextStepScheduleTimer = 1000
-
+    local nextStepScheduleTimer = 300
+    local firstStepIcon = resultWindow:recursiveGetChildById('firstStepIcon')
+    local secondStepIcon = resultWindow:recursiveGetChildById('secondStepIcon')
+    local thirdStepIcon = resultWindow:recursiveGetChildById('thirdStepIcon')
+    local leftItemSlot = resultWindow:recursiveGetChildById('leftItemSlot')
+    local rightItemSlot = resultWindow:recursiveGetChildById('rightItemSlot')
+    leftItemSlot:setColor('#ffffff')
+    
     if step == 1 then
-        resultWindow:recursiveGetChildById('firstStepIcon'):setBackgroundColor('white')
+        leftItemSlot:setReplaceShader(true)
     end
 
     if step == 2 then
-        resultWindow:recursiveGetChildById('secondStepIcon'):setBackgroundColor('white')
+        leftItemSlot:setReplaceShader(false)
     end
 
     if step == 3 then
-        resultWindow:recursiveGetChildById('thirdStepIcon'):setBackgroundColor('white')
-        nextStepScheduleTimer = 1500
+        firstStepIcon:setBackgroundColor('white')
+        leftItemSlot:setReplaceShader(true)
     end
 
     if step == 4 then
-        local rightItemSlot = resultWindow:recursiveGetChildById('rightItemSlot')
+        leftItemSlot:setReplaceShader(false)
+    end
+
+    if step == 5 then
+        leftItemSlot:setReplaceShader(true)
+        secondStepIcon:setBackgroundColor('white')
+    end
+
+    if step == 6 then
+        leftItemSlot:setReplaceShader(false)
+    end
+
+    if step == 7 then
+        thirdStepIcon:setBackgroundColor('white')
+        leftItemSlot:setReplaceShader(true)
+    end
+
+    if step == 8 then
+        leftItemSlot:setReplaceShader(false)
+    end
+
+    if step == 9 then
         rightItemSlot:setReplaceShader(false)
         if m_success then
             resultWindow:recursiveGetChildById('rightItemSlot')
@@ -39,11 +66,24 @@ local function nextStep()
         else
             rightItemSlot:setColor('#ff0000')
         end
+        firstStepIcon:setBackgroundColor (m_success and 'green' or 'red')
+        secondStepIcon:setBackgroundColor(m_success and 'green' or 'red')
+        thirdStepIcon:setBackgroundColor (m_success and 'green' or 'red')
+        nextStepScheduleTimer = 2000 
+    end
+
+    if step == 10 then
+        leftItemSlot:setVisible(false)
+        firstStepIcon:setVisible (false)
+        secondStepIcon:setVisible(false)
+        thirdStepIcon:setVisible (false)
+        rightItemSlot:centerIn('parent')
+        rightItemSlot:setMarginTop(-10)
         nextStepScheduleTimer = 2000
     end
 
     
-    if step == 5 then
+    if step == 11 then
         print('trying to handle animation finish')
         resultWindow:destroy()
         resultWindow = nil

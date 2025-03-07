@@ -545,7 +545,7 @@ public:
     void setImageBorderBottom(const int border) { m_imageBorder.bottom = border; configureBorderImage(); }
     void setImageBorderLeft(const int border) { m_imageBorder.left = border; configureBorderImage(); }
     void setImageBorder(const int border) { m_imageBorder.set(border); configureBorderImage(); }
-    void setReplaceShader(const bool replaceShader) { setProp(PropReplaceShader, replaceShader); }
+    void setReplaceShader(const bool replaceShader) { setProp(PropReplaceShader, replaceShader); updateLayout(); repaint(); }
 
     std::string getImageSource() { return m_imageSource; }
     Rect getImageClip() { return m_imageClipRect; }
