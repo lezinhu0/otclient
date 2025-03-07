@@ -26,11 +26,20 @@ local function nextStep()
 
     if step == 3 then
         resultWindow:recursiveGetChildById('thirdStepIcon'):setBackgroundColor('white')
+        nextStepScheduleTimer = 1500
     end
 
     if step == 4 then
-        resultWindow:recursiveGetChildById('rightItemSlot'):setColor('white')
-        nextStepScheduleTimer = 3000
+        local rightItemSlot = resultWindow:recursiveGetChildById('rightItemSlot')
+        rightItemSlot:setReplaceShader(false)
+        if m_success then
+            resultWindow:recursiveGetChildById('rightItemSlot')
+            rightItemSlot:setColor('#ffffff')
+            rightItemSlot.itemBadge:setVisible(true)
+        else
+            rightItemSlot:setColor('#ff0000')
+        end
+        nextStepScheduleTimer = 2000
     end
 
     
@@ -48,6 +57,8 @@ local function nextStep()
 end
 
 function showForgeResult(actionType, convergence, success, leftItemId, leftItemTier, rightItemId, rightItemTier, bonus, coreCount, keptItemId, keptItemTier)
+    print('\n\n\nhandling forge result')
+
     m_actionType = actionType
     m_convergence = convergence
     m_success = success
@@ -65,8 +76,27 @@ function showForgeResult(actionType, convergence, success, leftItemId, leftItemT
         resultWindow = g_ui.displayUI('forge_result_window')
     end
 
-    resultWindow:recursiveGetChildById('leftItemSlot'):setItemId(m_leftItemId)
-    resultWindow:recursiveGetChildById('rightItemSlot'):setItemId(m_rightItemId)
+    local leftItemSlot = resultWindow:recursiveGetChildById('leftItemSlot')
+    leftItemSlot:setItemId(m_leftItemId)
+    if m_leftItemTier > 0 then
+        leftItemSlot.itemBadge:setImageClip({
+            x = (m_leftItemTier - 1) * 9,
+            y = 0,
+            width = 10,
+            height = 9
+        })
+        leftItemSlot.itemBadge:setVisible(true)
+    end
+    local rightItemSlot = resultWindow:recursiveGetChildById('rightItemSlot')
+    if m_success then
+        rightItemSlot.itemBadge:setImageClip({
+            x = (m_rightItemTier - 1) * 9,
+            y = 0,
+            width = 10,
+            height = 9
+        })
+    end
+    rightItemSlot:setItemId(m_rightItemId)
 
     nextStep()
 end

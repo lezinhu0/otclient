@@ -1190,7 +1190,7 @@ function g_game.imbuementDurations(isOpen) end
 
 
 ---@param item Item
-function g_game.forgeFusionItem(item) end
+function g_game.forgeFusionItem(item, usedCore) end
 
 --------------------------------
 --------- g_gameConfig ---------

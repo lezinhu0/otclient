@@ -783,7 +783,7 @@ public:
     auto getServerWalkTicks() const { return m_walkTicks; }
     auto getWalkTicksElapsed() const { return m_walkTimer.ticksElapsed(); }
 
-    void forgeFusionItem(const ItemPtr& item);
+    void forgeFusionItem(const ItemPtr& item, const bool usedCore);
 protected:
     void enableBotCall() { m_denyBotCall = false; }
     void disableBotCall() { m_denyBotCall = true; }

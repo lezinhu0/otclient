@@ -101,7 +101,9 @@ local function drawFusionPage()
     successRateValueLabel:setColor(useCore and 'green' or 'red')
 
     local fusionButton = forgeWindow:recursiveGetChildById('fusionButton')
-    if selectedItem and g_game.getLocalPlayer():getTotalMoney() >= fusionPrice then
+    local totalMoney = g_game.getLocalPlayer():getTotalMoney()
+    print(string.format('fusion price: %d\ntotal money: %d', fusionPrice, totalMoney))
+    if selectedItem and totalMoney >= fusionPrice then
         fusionButton:enable()
     else
         fusionButton:disable()

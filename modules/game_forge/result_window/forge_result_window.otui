@@ -13,6 +13,16 @@ MainWindow
     margin-top: 30
     margin-left: 10
 
+    UIWidget
+      id: itemBadge
+      visible: false
+      anchors.top: parent.top
+      anchors.right: parent.right
+      margin-top: 0
+      margin-right: 0
+      image-source: /images/inventory/tiers-strip
+      size: 18 20
+
   UIWidget
     id: centerPanel
     size: 170 80
@@ -48,4 +58,14 @@ MainWindow
     margin-top: 30
     margin-left: 10
     image-replace-shader: true
-    color: red
+    color: black
+
+    UIWidget
+      id: itemBadge
+      visible: false
+      anchors.top: parent.top
+      anchors.right: parent.right
+      margin-top: 0
+      margin-right: 0
+      image-source: /images/inventory/tiers-strip
+      size: 18 20

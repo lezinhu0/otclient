@@ -1,3 +1,4 @@
+
 ForgeItemSprite < UIItem
 
 SectionButton < Button
@@ -152,8 +153,8 @@ MainWindow
           anchors.fill: parent
           padding: 15 85 15 85
           virtual: true
-          !image-replace-shader: true
-          color: black
+          image-replace-shader: true
+          color: #000000
 
           UIWidget
             id: selectedItemBadge
