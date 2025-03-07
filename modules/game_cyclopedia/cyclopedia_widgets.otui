@@ -654,6 +654,7 @@ ItemsListBaseItem < UIWidget
   UIItem
     id: Sprite
     anchors.fill: ItemBackground
+    phantom: true
   Label
     id: Name
     anchors.left: ItemBackground.right

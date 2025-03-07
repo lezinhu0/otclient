@@ -140,6 +140,7 @@ UIWidget
     UIItem
       id: Sprite
       anchors.fill: parent
+      phantom: true
   Label
     id: SearchLabel
     anchors.left: SelectedItem.right

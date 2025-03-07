@@ -69,7 +69,7 @@ local function nextStep()
         firstStepIcon:setBackgroundColor (m_success and 'green' or 'red')
         secondStepIcon:setBackgroundColor(m_success and 'green' or 'red')
         thirdStepIcon:setBackgroundColor (m_success and 'green' or 'red')
-        nextStepScheduleTimer = 2000 
+        nextStepScheduleTimer = 1000 
     end
 
     if step == 10 then
