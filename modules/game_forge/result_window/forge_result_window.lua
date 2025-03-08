@@ -84,7 +84,6 @@ local function nextStep()
 
     
     if step == 11 then
-        print('trying to handle animation finish')
         resultWindow:destroy()
         resultWindow = nil
         modules.game_forge.showingResult = false

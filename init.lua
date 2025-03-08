@@ -9,7 +9,7 @@ Services = {
 }
 
 Servers_init = {
-    ["http://127.0.0.1/login.php"] = {
+    ["https://arcaneot.com/login.php"] = {
         ["port"] = 80,
         ["protocol"] = 1332,
         ["httpLogin"] = true

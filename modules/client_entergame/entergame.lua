@@ -695,6 +695,7 @@ function EnterGame.doLogin()
     G.authenticatorToken = enterGame:getChildById('authenticatorTokenTextEdit'):getText()
     G.stayLogged = enterGame:getChildById('stayLoggedBox'):isChecked()
     G.host = "127.0.0.1/login.php"
+    -- G.host = "https://arcaneot.com/login.php"
     G.port = tonumber(enterGame:getChildById('serverPortTextEdit'):getText())
     local clientVersion = tonumber(clientBox:getText())
     local httpLogin = enterGame:getChildById('httpLoginBox'):isChecked()
