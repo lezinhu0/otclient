@@ -196,9 +196,6 @@ function CharacterList.init()
         onLoginWait = onLoginWait
     })
     connect(g_game, {
-        onGameEnd = CharacterList.showAgain
-    })
-    connect(g_game, {
         onLogout = onLogout 
     })
 
@@ -225,9 +222,6 @@ function CharacterList.terminate()
     })
     disconnect(g_game, {
         onLoginWait = onLoginWait
-    })
-    disconnect(g_game, {
-        onGameEnd = CharacterList.showAgain
     })
     disconnect(g_game, {
         onLogout = onLogout 
@@ -456,10 +450,12 @@ function CharacterList.hide(showLogin)
     end
 end
 
-function CharacterList.showAgain()
+function CharacterList.showAgain(cancelReconnect)
     if characterList and characterList:hasChildren() then
         CharacterList.show()
-        scheduleAutoReconnect()
+        if not cancelReconnect then
+            scheduleAutoReconnect()
+        end
     end
 end
 

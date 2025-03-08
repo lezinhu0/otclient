@@ -40,6 +40,24 @@
       }
     },
     {
+      "name": "windows-release-debug",
+      "inherits": "windows-release",
+      "displayName": "Windows - Release + Debug",
+      "description": "Release mode with debug symbols",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "windows-debug",
+      "inherits": "windows-release",
+      "displayName": "Windows - Debug",
+      "description": "Full debug mode",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
       "name": "linux-release",
       "displayName": "Linux - Release",
       "description": "Sets Ninja generator, compilers, build and install directory and set build type as release",
@@ -57,54 +75,6 @@
         "type": "equals",
         "lhs": "${hostSystemName}",
         "rhs": "Linux"
-      }
-    },
-    {
-      "name": "windows-release-asan",
-      "inherits": "windows-release",
-      "displayName": "Windows - Release + ASAN",
-      "description": "Release Mode with ASAN",
-      "cacheVariables": {
-        "ASAN_ENABLED": "ON",
-        "BUILD_STATIC_LIBRARY": "OFF",
-        "VCPKG_TARGET_TRIPLET": "x64-windows"
-      },
-      "architecture": {
-        "value": "x64",
-        "strategy": "external"
-      }
-    },
-    {
-      "name": "windows-debug",
-      "displayName": "Windows - Debug",
-      "description": "Sets Ninja generator, compilers, build and install directory and set build type as release",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": {
-          "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-          "type": "FILEPATH"
-        },
-        "BUILD_STATIC_LIBRARY": "ON",
-        "VCPKG_TARGET_TRIPLET": "x64-windows-static",
-        "CMAKE_BUILD_TYPE": "Debug",
-        "OPTIONS_ENABLE_SCCACHE": "ON"
-      },
-      "architecture": {
-        "value": "x64",
-        "strategy": "external"
-      },
-      "vendor": {
-        "microsoft.com/VisualStudioSettings/CMake/1.0": {
-          "hostOS": [
-            "Windows"
-          ]
-        }
-      },
-      "condition": {
-        "type": "equals",
-        "lhs": "${hostSystemName}",
-        "rhs": "Windows"
       }
     },
     {
@@ -169,8 +139,8 @@
       "configurePreset": "windows-release"
     },
     {
-      "name": "windows-release-asan",
-      "configurePreset": "windows-release-asan"
+      "name": "windows-release-debug",
+      "configurePreset": "windows-release-debug"
     },
     {
       "name": "windows-debug",
